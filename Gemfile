@@ -38,3 +38,9 @@ gem 'spring',        group: :development
 
 gem 'virtus'
 
+gem 'haml'
+
+group :development, :test do
+  gem 'rspec-rails', '~> 3.0.0'
+end
+
