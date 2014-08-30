@@ -4,8 +4,7 @@
   -#.bs-preview-info
   .bs-preview-primary
     %h4= link_to item, item
-
-    %p= truncate item.content.html_safe
+    ~ markdown item.content
 
     %ul.list-inline
       = link_to 'edit', { action: :edit, id: item }

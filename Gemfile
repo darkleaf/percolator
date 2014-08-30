@@ -17,6 +17,7 @@ gem 'turbolinks'
 
 gem 'virtus'
 gem 'simple_form', github: 'plataformatec/simple_form'
+gem 'redcarpet'
 
 group :development, :test do
   gem 'rspec-rails', '~> 3.0.0'
