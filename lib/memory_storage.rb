@@ -17,4 +17,8 @@ module MemoryStorage
   def destroy_post_command
     ->(post) { @state.delete post.id }
   end
+
+  def clear_command
+    -> { @state = {} }
+  end
 end
