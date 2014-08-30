@@ -30,4 +30,26 @@ RSpec.describe ElasticStorage do
       expect(client.exists index: 'documents', type: 'post', id: post.id).to be false
     end
   end
+
+  context 'find_post_by_id_query' do
+    let (:post) { build :post }
+
+    before :each do
+      ElasticStorage.save_post_command.call post
+    end
+
+    it 'work correctly' do
+      fetched_post = ElasticStorage.find_post_by_id_query.call post.id
+      expect(fetched_post.attributes).to include post.attributes
+    end
+
+    it 'return nil in silent mode' do
+      fetched_post = ElasticStorage.find_post_by_id_query.call 'unsaved_post_id', silent: true
+      expect(fetched_post).to be nil
+    end
+
+    it 'raise error if silent mode off' do
+      expect{ElasticStorage.find_post_by_id_query.call 'unsaved_post_id'}.to raise_error ElasticStorage::NotFound
+    end
+  end
 end

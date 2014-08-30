@@ -1,6 +1,8 @@
 module ElasticStorage
   extend self
 
+  class NotFound < StandardError; end
+
   def posts_by_date_query
     PostsByDateQuery
   end
