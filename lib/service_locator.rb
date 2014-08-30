@@ -1,7 +1,3 @@
 module ServiceLocator
-  extend self
-
-  def storage
-    MemoryStorage
-  end
+  mattr_accessor :storage
 end

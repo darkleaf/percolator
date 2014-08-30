@@ -42,7 +42,7 @@ RSpec.configure do |config|
     ElasticStorage.put_mappings_command.call
   end
 
-  config.before :suite do
+  config.after :suite do
     ElasticStorage.remove_indices_command.call
   end
 
