@@ -16,4 +16,18 @@ RSpec.describe ElasticStorage do
       expect(client.exists index: 'documents', type: 'post', id: post.id).to be true
     end
   end
+
+  context 'destroy_post_command' do
+    let (:post) { build :post }
+
+    before :each do
+      ElasticStorage.save_post_command.call post
+    end
+
+    it 'work correctly' do
+      ElasticStorage.destroy_post_command.call post
+
+      expect(client.exists index: 'documents', type: 'post', id: post.id).to be false
+    end
+  end
 end
