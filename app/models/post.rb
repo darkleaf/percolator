@@ -14,4 +14,8 @@ class Post
   def to_param
     id
   end
+
+  def to_s
+    title
+  end
 end

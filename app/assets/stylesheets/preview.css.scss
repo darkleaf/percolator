@@ -1,0 +1,44 @@
+//based on bs-callout
+@mixin bs-preview($color, $bgcolor) {
+  display: block;
+  margin: 20px 0;
+  padding: 15px 30px 15px 15px;
+  border: 1px solid;
+  border-color: lighten($color, 25%);
+  border-radius: 3px;
+  background-color: $bgcolor;
+
+  .list-inline {
+    margin-left: 0;
+  }
+  h1, h2, h3, h4, h5, h6, a {
+    margin-top: 0;
+    color: $color;
+  }
+  :last-child {
+    margin-bottom: 0;
+  }
+  code, .highlight {
+    background-color: #fff;
+  }
+}
+
+.bs-preview-primary {
+  @include bs-preview($brand-primary, lighten($brand-primary, 45%));
+}
+
+.bs-preview-danger {
+  @include bs-preview($brand-danger, lighten($brand-danger, 30%));
+}
+
+.bs-preview-warning {
+  @include bs-preview($brand-warning, lighten($brand-warning, 50%));
+}
+
+.bs-preview-info {
+  @include bs-preview($brand-info, lighten($brand-info, 40%));
+}
+
+.bs-preview-success {
+  @include bs-preview($brand-success, lighten($brand-success, 40%));
+}
