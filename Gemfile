@@ -1,4 +1,5 @@
 source 'https://rubygems.org'
+ruby "2.1.2"
 
 gem 'rails', '4.1.5'
 
@@ -22,6 +23,10 @@ gem 'figaro'
 
 gem 'simple_form', github: 'plataformatec/simple_form'
 gem 'redcarpet'
+
+group :production do
+  gem 'rails_12factor'
+end
 
 group :development, :test do
   gem 'rspec-rails', '~> 3.0.0'

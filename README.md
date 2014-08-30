@@ -11,3 +11,9 @@ download elasticsearch in elasticsearch folder
     http.port: 9201
     index.number_of_shards: 1
     index.number_of_replicas: 0
+
+# Heroku
+
+heroku apps:create YOU_NICK_NAME-percolator
+heroku addons:add bonsai
+g push heroku master
