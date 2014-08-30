@@ -52,4 +52,22 @@ RSpec.describe ElasticStorage do
       expect{ElasticStorage.find_post_by_id_query.call 'unsaved_post_id'}.to raise_error ElasticStorage::NotFound
     end
   end
+
+  context 'posts_by_date_query' do
+    let (:past_post) { build :post, published_at: 1.day.ago.to_datetime }
+    let (:future_post) { build :post, published_at: 1.day.since.to_datetime }
+
+    before :each do
+      ElasticStorage.save_post_command.call past_post
+      ElasticStorage.save_post_command.call future_post
+    end
+
+    it 'work correctly' do
+      posts = ElasticStorage.posts_by_date_query.call
+
+      expect(posts.length).to eq 2
+      expect(posts.first.attributes).to include future_post.attributes
+      expect(posts.last.attributes).to include past_post.attributes
+    end
+  end
 end

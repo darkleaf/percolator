@@ -8,9 +8,7 @@ module ElasticStorage
       params.merge! ignore: [404] if silent
       responce = client.get params
       return unless responce
-      post = Post.new responce['_source']
-      post.send 'id=', id
-      post
+      PostMapper.from_responce id, responce['_source']
     rescue Elasticsearch::Transport::Transport::Errors::NotFound
       raise NotFound
     end
