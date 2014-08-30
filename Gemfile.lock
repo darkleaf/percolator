@@ -47,6 +47,8 @@ GEM
     builder (3.2.2)
     codeclimate-test-reporter (0.4.0)
       simplecov (>= 0.7.1, < 1.0.0)
+    codemirror-rails (4.5)
+      railties (>= 3.0, < 5)
     coercible (1.0.0)
       descendants_tracker (~> 0.0.1)
     coffee-rails (4.0.1)
@@ -174,6 +176,7 @@ DEPENDENCIES
   autoprefixer-rails
   bootstrap-sass
   codeclimate-test-reporter
+  codemirror-rails
   factory_girl_rails
   factory_girl_sequences
   haml

@@ -10,6 +10,7 @@ gem 'jquery-rails'
 gem 'haml'
 gem 'bootstrap-sass'
 gem 'autoprefixer-rails'
+gem 'codemirror-rails'
 
 gem 'turbolinks'
 

@@ -14,4 +14,7 @@
 //= require jquery_ujs
 //= require turbolinks
 //= require bootstrap-sprockets
+//= require codemirror
+//= require codemirror/modes/markdown
+//= require codemirror/addons/edit/continuelist
 //= require_tree .
