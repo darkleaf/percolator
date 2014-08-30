@@ -36,6 +36,16 @@ RSpec.configure do |config|
   # https://relishapp.com/rspec/rspec-rails/docs
   config.infer_spec_type_from_file_location!
 
+  config.before :suite do
+    ElasticStorage.remove_indices_command.call
+    ElasticStorage.create_indices_command.call
+    ElasticStorage.put_mappings_command.call
+  end
+
+  config.before :suite do
+    ElasticStorage.remove_indices_command.call
+  end
+
   config.after :each do
     storage.clear_command.call
   end

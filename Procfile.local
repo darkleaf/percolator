@@ -1,0 +1,3 @@
+web: rails s
+elasticsearch_development: elasticsearch/bin/elasticsearch
+elasticsearch_test: elasticsearch/bin/elasticsearch -Des.config=elasticsearch/config/elasticsearch-test.yml

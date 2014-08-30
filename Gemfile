@@ -16,6 +16,10 @@ gem 'codemirror-rails'
 gem 'turbolinks'
 
 gem 'virtus'
+gem 'elasticsearch'
+
+gem 'figaro'
+
 gem 'simple_form', github: 'plataformatec/simple_form'
 gem 'redcarpet'
 
@@ -25,6 +29,7 @@ end
 
 group :development do
   gem 'spring'
+  gem 'foreman'
 end
 
 group :test do

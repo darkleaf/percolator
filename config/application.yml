@@ -1,0 +1,5 @@
+elasticsearch_url: http://localhost:9200
+test:
+  elasticsearch_url: http://localhost:9201
+production:
+  elasticsearch_url: <%= ENV['BONSAI_URL']%>
