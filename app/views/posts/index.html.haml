@@ -1,0 +1,6 @@
+= link_to 'new', { action: :new }, class: 'btn btn-primary'
+
+- @posts.each do |item|
+  = item.title
+  = link_to 'edit', { action: :edit, id: item }, class: 'btn btn-primary'
+  = link_to 'destroy', { action: :destroy, id: item }, method: :delete, data: { confirm: 'Sure?' }, class: 'btn btn-warning'

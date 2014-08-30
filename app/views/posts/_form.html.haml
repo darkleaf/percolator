@@ -1,0 +1,7 @@
+= simple_form_for post, url: url, method: method do |f|
+  = f.input :title
+  = f.input :content#, as: :editor
+
+  .form-actions
+    = f.button :submit, action, class: 'btn-primary'
+    = link_to t('cancel'), { action: :index }, class: 'btn'
