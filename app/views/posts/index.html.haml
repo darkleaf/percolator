@@ -4,7 +4,7 @@
   -#.bs-preview-info
   .bs-preview-primary
     %h4= link_to item, item
-    ~ markdown item.content
+    = l item.published_at.to_date, format: :short
 
     %ul.list-inline
       = link_to 'edit', { action: :edit, id: item }
