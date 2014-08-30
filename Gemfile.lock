@@ -48,6 +48,14 @@ GEM
     equalizer (0.0.9)
     erubis (2.7.0)
     execjs (2.2.1)
+    factory_girl (4.4.0)
+      activesupport (>= 3.0.0)
+    factory_girl_rails (4.4.1)
+      factory_girl (~> 4.4.0)
+      railties (>= 3.0.0)
+    factory_girl_sequences (4.3.1)
+      activesupport (>= 3.0.0)
+      factory_girl (~> 4.0)
     haml (4.0.5)
       tilt
     hike (1.2.3)
@@ -147,6 +155,8 @@ PLATFORMS
 
 DEPENDENCIES
   coffee-rails (~> 4.0.0)
+  factory_girl_rails
+  factory_girl_sequences
   haml
   jbuilder (~> 2.0)
   jquery-rails

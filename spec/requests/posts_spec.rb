@@ -3,8 +3,7 @@ require 'rails_helper'
 RSpec.describe 'posts', type: :request do
   context 'index page' do
     before :context do
-      @post = Post.new title: 'title', content: 'content'
-      storage.save_post_command.call(@post)
+      @post = create :post
       get "/posts"
     end
 
