@@ -4,7 +4,7 @@ RSpec.describe 'posts', type: :request do
   context 'index page' do
     before :context do
       @post = Post.new title: 'title', content: 'content'
-      CreatePostCommand.call post
+      storage.save_post_command.call(@post)
       get "/posts"
     end
 

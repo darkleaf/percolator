@@ -1,6 +1,6 @@
 class PostsController < ApplicationController
   def index
-    @posts = PostsByDateQuery.call
+    @posts = storage.posts_by_date_query.call
   end
 
   def new
@@ -9,23 +9,23 @@ class PostsController < ApplicationController
 
   def create
     @post = Post.new post_params
-    SavePostCommand.call @post
+    storate.save_post_command.call @post
     redirect_to action: :index
   end
 
   def edit
-    @post = FindPostByIdQuery.call params[:id]
+    @post = storage.find_post_by_id_query.call params[:id]
   end
 
   def update
-    @post = FindPostByIdQuery.call params[:id]
+    @post = storage.find_post_by_id_query.call params[:id]
     @post.attributes = post_params
-    SavePostCommand.call @post
+    storage.save_post_command.call @post
     redirect_to action: :index
   end
 
   def destroy
-    DestroyPostCommand.call params[:id]
+    storage.destroy_post_command.call params[:id]
     redirect_to action: :index
   end
 
