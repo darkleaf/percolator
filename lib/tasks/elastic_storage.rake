@@ -9,6 +9,6 @@ namespace :elastic_storage do
     ElasticStorage.put_mappings_command.call
   end
 
-  desc "Put mappings"
+  desc "Create indices and put mappings"
   task prepare: [:create_indices, :put_mappings]
 end
