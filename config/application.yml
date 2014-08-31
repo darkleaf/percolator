@@ -1,5 +1,9 @@
 elasticsearch_url: http://localhost:9200
+storage: ElasticStorage
+
 test:
   elasticsearch_url: http://localhost:9201
+  storage: MemoryStorage
+
 production:
   elasticsearch_url: <%= ENV['BONSAI_URL']%>

@@ -1,3 +1,7 @@
 module ServiceLocator
-  mattr_accessor :storage
+  extend self
+
+  def storage
+    @storage ||= Figaro.env.storage.constantize
+  end
 end
