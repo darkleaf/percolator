@@ -20,6 +20,8 @@ RSpec.describe 'api v1 stars', type: :request do
       expect(page.description).to be
       expect(page.keywords).to be
       expect(page.content).to be
+      expect(page.url).to be
+      expect(page.host).to be
     end
   end
 end

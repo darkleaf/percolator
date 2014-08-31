@@ -4,6 +4,7 @@ class FavoritePage
 
   attribute :id, String, writer: :private
   attribute :url, String
+  attribute :host, String, writer: :private
   attribute :title, String
   attribute :description, String
   attribute :keywords, String
@@ -11,6 +12,7 @@ class FavoritePage
   attribute :published_at, DateTime, default: -> (_post, _attr) { DateTime.current }
 
   def url=(value)
+    self.host = 'some_host.com'
     self.id = Digest::MD5.hexdigest value
     super
   end

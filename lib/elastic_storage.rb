@@ -3,6 +3,8 @@ module ElasticStorage
 
   class NotFound < StandardError; end
 
+  # posts
+
   def posts_by_date_query
     PostsByDateQuery
   end
@@ -18,6 +20,26 @@ module ElasticStorage
   def destroy_post_command
     DestroyPostCommand
   end
+
+  # favorite pages
+
+  def favorite_pages_by_date_query
+    FavoritePagesByDateQuery
+  end
+
+  def find_favorite_page_by_id_query
+    FindFavoritePageByIdQuery
+  end
+
+  def save_favorite_page_command
+    SaveFavoritePageCommand
+  end
+
+  def destroy_favorite_page_command
+    DestroyFavoritePageCommand
+  end
+
+  #indices
 
   def clear_command
     ClearCommand
