@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   root to: 'posts#index'
   resources :posts
+  resources :favorite_pages
 
   namespace :api do
     namespace :v1 do

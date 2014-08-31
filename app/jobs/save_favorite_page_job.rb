@@ -8,6 +8,6 @@ class SaveFavoritePageJob
     attrs.merge! url: url
 
     page = FavoritePage.new attrs
-    storage.save_favorite_page.call page
+    storage.save_favorite_page_command.call page
   end
 end
