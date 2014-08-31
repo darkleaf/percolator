@@ -7,6 +7,8 @@ CodeClimate::TestReporter.start
 require 'spec_helper'
 require File.expand_path("../../config/environment", __FILE__)
 require 'rspec/rails'
+require 'sucker_punch/testing/inline'
+require 'webmock/rspec'
 
 # Requires supporting ruby files with custom matchers and macros, etc, in
 # spec/support/ and its subdirectories. Files matching `spec/**/*_spec.rb` are
@@ -16,6 +18,8 @@ require 'rspec/rails'
 # end with _spec.rb. You can configure this pattern with the --pattern
 # option on the command line or in ~/.rspec, .rspec or `.rspec-local`.
 Dir[Rails.root.join("spec/support/**/*.rb")].each { |f| require f }
+
+WebMock.disable_net_connect!(allow_localhost: true)
 
 RSpec.configure do |config|
   config.include ServiceLocator
@@ -50,3 +54,8 @@ RSpec.configure do |config|
     storage.clear_command.call
   end
 end
+
+def fixture_file_path(name)
+  File.join(Dir.pwd, 'spec', 'fixtures', name)
+end
+

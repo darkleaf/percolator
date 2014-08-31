@@ -19,9 +19,12 @@ gem 'turbolinks'
 gem 'virtus'
 gem 'elasticsearch'
 
+gem 'sucker_punch'
+
 gem 'figaro'
 
 gem 'simple_form', github: 'plataformatec/simple_form'
+
 gem 'redcarpet'
 
 group :production do
@@ -41,4 +44,5 @@ group :test do
   gem "codeclimate-test-reporter", require: nil
   gem 'factory_girl_rails'
   gem 'factory_girl_sequences'
+  gem 'webmock'
 end
