@@ -27,6 +27,8 @@ gem 'simple_form', github: 'plataformatec/simple_form'
 
 gem 'redcarpet'
 
+gem 'ruby-readability'
+
 group :production do
   gem 'rails_12factor'
 end
