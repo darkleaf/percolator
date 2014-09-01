@@ -1,5 +1,6 @@
 elasticsearch_url: http://localhost:9200
 storage: ElasticStorage
+password: password
 
 test:
   elasticsearch_url: http://localhost:9201

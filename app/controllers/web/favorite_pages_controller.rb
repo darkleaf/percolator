@@ -1,4 +1,6 @@
-class FavoritePagesController < ApplicationController
+class Web::FavoritePagesController < Web::ApplicationController
+  skip_before_filter :authenticate!, only: %i[index show]
+
   def index
     @favorite_pages = storage.favorite_pages_by_date_query.call
   end

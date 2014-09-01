@@ -59,3 +59,7 @@ def fixture_file_path(name)
   File.join(Dir.pwd, 'spec', 'fixtures', name)
 end
 
+def sign_in
+  post "/session", session: {password: Figaro.env.password}
+end
+

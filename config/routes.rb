@@ -1,14 +1,17 @@
 Rails.application.routes.draw do
   root to: 'posts#index'
-  resources :posts
-  resources :favorite_pages
+
+  scope module: :web do
+    resources :posts
+    resources :favorite_pages
+    resource :session
+  end
 
   namespace :api do
     namespace :v1 do
       resources :stars, only: :create
     end
   end
-
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

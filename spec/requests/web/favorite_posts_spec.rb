@@ -20,6 +20,7 @@ RSpec.describe 'favorite_pages', type: :request do
   end
 
   context 'delete action' do
+    before(:each){ sign_in }
     let (:favorite_page) { create :favorite_page }
 
     it 'delete favorite_page' do
