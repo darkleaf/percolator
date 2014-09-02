@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  root to: 'posts#index'
+  root to: 'web/posts#index'
 
   scope module: :web do
     resources :posts

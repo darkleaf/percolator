@@ -6,6 +6,7 @@
     %h4= link_to item, item
     = l item.published_at.to_date, format: :short
 
-    %ul.list-inline
-      = link_to 'edit', { action: :edit, id: item }
-      = link_to 'destroy', { action: :destroy, id: item }, method: :delete, data: { confirm: 'Sure?' }
+    - if signed_in?
+      %ul.list-inline
+        = link_to 'edit', { action: :edit, id: item }
+        = link_to 'destroy', { action: :destroy, id: item }, method: :delete, data: { confirm: 'Sure?' }

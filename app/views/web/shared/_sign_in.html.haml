@@ -1,0 +1,14 @@
+#sign_in.modal.fade{aria: {hidden: true, labelledby: :sign_in_label}, role: "dialog", tabindex: -1}
+  .modal-dialog
+    .modal-content
+      .modal-header
+        %button.close{"data-dismiss" => "modal", :type => "button"}
+          %span{"aria-hidden" => "true"} ×
+          %span.sr-only Close
+        %h4#sign_in_label.modal-title Sign in
+      = simple_form_for :session, url: session_path do |f|
+        .modal-body
+          = f.input :password
+        .modal-footer
+          = f.button :submit, 'Ok', class: 'btn-primary'
+          %button.btn.btn-default{"data-dismiss" => "modal", :type => "button"} Close

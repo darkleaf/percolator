@@ -62,4 +62,3 @@ end
 def sign_in
   post "/session", session: {password: Figaro.env.password}
 end
-

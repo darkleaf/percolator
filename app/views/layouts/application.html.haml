@@ -7,5 +7,25 @@
     %meta{name: 'viewport', content: 'width=device-width, initial-scale=1'}
     = csrf_meta_tags
   %body
+    .navbar.navbar-default.navbar-static-top{role: "navigation"}
+      .container
+        .navbar-header
+          %button.navbar-toggle{"data-target" => ".navbar-collapse", "data-toggle" => "collapse", type: "button"}
+            %span.sr-only Toggle navigation
+            %span.icon-bar
+            %span.icon-bar
+            %span.icon-bar
+          = link_to 'Percolator.io', root_path, class: 'navbar-brand'
+        .collapse.navbar-collapse
+          -#%ul.nav.navbar-nav
+          -#  %li
+          %ul.nav.navbar-nav.navbar-right
+            - if signed_in?
+              %li= link_to 'Sign out', session_path, method: :delete
+            - if signed_out?
+              %li
+                %p.navbar-text
+                  %span.glyphicon.glyphicon-lock{"data-target" => "#sign_in", "data-toggle" => "modal"}
     .container
       = yield
+    = render 'web/shared/sign_in'
