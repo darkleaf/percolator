@@ -2,6 +2,5 @@
   %h1= @post.title
 
   %ul.list-inline.text-muted
-    %li= link_to 'Percolator.io', root_path
     %li= l @post.published_at.to_date, format: :long
 ~ markdown @post.content
