@@ -14,6 +14,11 @@ download elasticsearch in elasticsearch folder
 
 # Heroku
 
-heroku apps:create YOU_NICK_NAME-percolator
-heroku addons:add bonsai
-g push heroku master
+    heroku apps:create YOU_NICK_NAME-percolator
+    heroku addons:add bonsai
+    #remove postgresql addon ?
+
+    heroku config:set PASSWORD=YOU_PASSWORD
+    heroku config:set API_KEY=YOU_API_KEY
+
+    g push heroku master
