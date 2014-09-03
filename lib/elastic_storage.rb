@@ -42,18 +42,18 @@ module ElasticStorage
   #indices
 
   def clear_command
-    ClearCommand
+    Service::ClearCommand
   end
 
   def create_indices_command
-    CreateIndicesCommand
+    Service::CreateIndicesCommand
   end
 
   def remove_indices_command
-    RemoveIndicesCommand
+    Service::RemoveIndicesCommand
   end
 
   def put_mappings_command
-    PutMappingsCommand
+    Service::PutMappingsCommand
   end
 end
