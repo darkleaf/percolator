@@ -6,37 +6,37 @@ module ElasticStorage
   # posts
 
   def posts_by_date_query
-    PostsByDateQuery
+    PostType::ByDateQuery
   end
 
   def find_post_by_id_query
-    FindPostByIdQuery
+    PostType::FindByIdQuery
   end
 
   def save_post_command
-    SavePostCommand
+    PostType::SaveCommand
   end
 
   def destroy_post_command
-    DestroyPostCommand
+    PostType::DestroyCommand
   end
 
   # favorite pages
 
   def favorite_pages_by_date_query
-    FavoritePagesByDateQuery
+    FavoritePageType::ByDateQuery
   end
 
   def find_favorite_page_by_id_query
-    FindFavoritePageByIdQuery
+    FavoritePageType::FindByIdQuery
   end
 
   def save_favorite_page_command
-    SaveFavoritePageCommand
+    FavoritePageType::SaveCommand
   end
 
   def destroy_favorite_page_command
-    DestroyFavoritePageCommand
+    FavoritePageType::DestroyCommand
   end
 
   #indices
