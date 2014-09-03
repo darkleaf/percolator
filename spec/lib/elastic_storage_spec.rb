@@ -139,4 +139,23 @@ RSpec.describe ElasticStorage do
       expect(favorite_pages.last.attributes).to include past_favorite_page.attributes
     end
   end
+
+  context 'favorite_pages_for_post_query' do
+    let (:post) { build :post, similar_query: 'test' }
+    let (:favorite_page) { build :favorite_page, title: 'test' }
+    let (:another_favorite_page) { build :favorite_page }
+
+    before :each do
+      ElasticStorage.save_post_command.call post
+      ElasticStorage.save_favorite_page_command.call favorite_page
+      ElasticStorage.save_favorite_page_command.call another_favorite_page
+    end
+
+    it 'work correctly' do
+      favorite_pages = ElasticStorage.favorite_pages_for_post_query.call post
+
+      expect(favorite_pages.length).to eq 1
+      expect(favorite_pages.first.id).to eq favorite_page.id
+    end
+  end
 end

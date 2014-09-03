@@ -4,3 +4,6 @@
   %ul.list-inline.text-muted
     %li= l @post.published_at.to_date, format: :long
 ~ markdown @post.content
+
+- @favorite_pages.each do |page|
+  = link_to page, favorite_page_path(page)

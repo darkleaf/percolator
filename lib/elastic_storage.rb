@@ -27,6 +27,10 @@ module ElasticStorage
     FavoritePageType::ByDateQuery
   end
 
+  def favorite_pages_for_post_query
+    FavoritePageType::ForPostQuery
+  end
+
   def find_favorite_page_by_id_query
     FavoritePageType::FindByIdQuery
   end

@@ -26,6 +26,10 @@ module MemoryStorage
     ->{ @pages_storage.values }
   end
 
+  def favorite_pages_for_post_query
+    ->(_){ @pages_storage.values }
+  end
+
   def find_favorite_page_by_id_query
     ->(id) { @pages_storage[id] }
   end

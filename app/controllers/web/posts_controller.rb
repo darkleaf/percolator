@@ -7,6 +7,7 @@ class Web::PostsController < Web::ApplicationController
 
   def show
     @post = storage.find_post_by_id_query.call params[:id]
+    @favorite_pages = storage.favorite_pages_for_post_query.call @post
   end
 
   def new
