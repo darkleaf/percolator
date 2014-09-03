@@ -26,7 +26,8 @@
             - if signed_out?
               %li
                 %p.navbar-text
-                  %span.glyphicon.glyphicon-lock{"data-target" => "#sign_in", "data-toggle" => "modal"}
+                  = link_to '', data: {target: "#sign_in", toggle: "modal"} do
+                    %span.glyphicon.glyphicon-lock
     .container
       = yield
     = render 'web/shared/sign_in'
