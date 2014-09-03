@@ -38,6 +38,6 @@ class Web::PostsController < Web::ApplicationController
 
 private
   def post_params
-    params.require(:post).permit(:title, :content)
+    params.require(:post).permit(:title, :content, :similar_query)
   end
 end

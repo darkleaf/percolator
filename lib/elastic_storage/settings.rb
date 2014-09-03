@@ -42,6 +42,7 @@ module ElasticStorage
             title: { type: :string },
             content: { type: :string },
             published_at: { type: :date },
+            similar_query: { type: :string, index: :no },
           }
         },
         favorite_page: {
