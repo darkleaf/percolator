@@ -1,4 +1,4 @@
-class Api::V1::StarsController < ApplicationController
+class Api::V1::StarsController < Api::V1::ApplicationController
   def create
     SaveFavoritePageJob.new.async.perform star_params[:url]
 
