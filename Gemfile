@@ -23,6 +23,8 @@ gem 'sucker_punch'
 
 gem 'figaro'
 
+gem 'highline', require: 'highline/import'
+
 gem 'simple_form', github: 'plataformatec/simple_form'
 
 gem 'redcarpet'

@@ -11,9 +11,12 @@ namespace :elastic_storage do
 
   desc "Remove indices"
   task remove_indices: :environment do
-    ElasticStorage.remove_indices_command.call
+    ElasticStorage.remove_indices_command.call if agree("You lost you data! Remove indicies? (y/n)")
   end
 
   desc "Create indices and put mappings"
-  task prepare: %i[remove_indices create_indices put_mappings]
+  task prepare: %i[create_indices put_mappings]
+
+  desc "Reset indices and put mappings"
+  task reset: %i[remove_indices create_indices put_mappings]
 end
