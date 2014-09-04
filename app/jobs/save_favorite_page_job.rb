@@ -3,7 +3,7 @@ class SaveFavoritePageJob
   include ServiceLocator
 
   def perform(url)
-    source = open(url).read
+    source = open(url, "User-Agent" => "Mozilla/5.0").read
     attrs = DataExtractor.extract source
     attrs.merge! url: url
 
