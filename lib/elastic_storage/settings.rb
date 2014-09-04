@@ -52,7 +52,7 @@ module ElasticStorage
             title: { type: :string },
             description: { type: :string },
             keywords: { type: :string },
-            content: { type: :string },
+            content: { type: :string,  term_vector: :with_positions_offsets },
             published_at: { type: :date },
           }
         },
