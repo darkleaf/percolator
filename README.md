@@ -5,6 +5,12 @@
 
 download elasticsearch in elasticsearch folder
 
+
+# Elasticsearch plugins
+
+    elasticsearch/bin/plugin -install elasticsearch/elasticsearch-analysis-icu/2.3.0
+
+
 # Elasticsearch test config
     cluster.name: elasticsearch-test
     transport.tcp.port: 9301
