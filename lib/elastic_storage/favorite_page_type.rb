@@ -14,12 +14,12 @@ module ElasticStorage
       extend self
 
       def call(post)
-        return [] if post.similar_query.blank?
+        return [] if post.favorite_pages_query.blank?
         mapping = {favorite_page: Mapper.method(:from_response)}
         query = {
           query: {
             query_string: {
-              query: post.similar_query,
+              query: post.favorite_pages_query,
               fields: %w[title^3 keywords^2 description^2 host url content],
               lenient: true,
             }

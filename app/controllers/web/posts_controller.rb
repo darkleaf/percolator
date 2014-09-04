@@ -39,6 +39,6 @@ class Web::PostsController < Web::ApplicationController
 
 private
   def post_params
-    params.require(:post).permit(:title, :content, :similar_query)
+    params.require(:post).permit(:title, :content, :favorite_pages_query)
   end
 end

@@ -1,7 +1,7 @@
 = simple_form_for post, url: url, method: method do |f|
   = f.input :title
   = f.input :content, as: :markdown_editor
-  = f.input :similar_query, as: :query_editor
+  = f.input :favorite_pages_query, as: :query_editor
 
   .form-actions
     = f.button :submit, action, class: 'btn-primary'

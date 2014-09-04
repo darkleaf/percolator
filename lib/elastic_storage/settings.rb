@@ -42,7 +42,7 @@ module ElasticStorage
             title: { type: :string },
             content: { type: :string, term_vector: :with_positions_offsets },
             published_at: { type: :date },
-            similar_query: { type: :string, index: :no },
+            favorite_pages_query: { type: :string, index: :no },
           }
         },
         favorite_page: {

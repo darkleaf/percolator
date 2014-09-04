@@ -141,7 +141,7 @@ RSpec.describe ElasticStorage do
   end
 
   context 'favorite_pages_for_post_query' do
-    let (:post) { build :post, similar_query: 'test' }
+    let (:post) { build :post, favorite_pages_query: 'test' }
     let (:favorite_page) { build :favorite_page, title: 'test' }
     let (:another_favorite_page) { build :favorite_page }
 
