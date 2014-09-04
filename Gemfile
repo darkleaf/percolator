@@ -28,6 +28,7 @@ gem 'simple_form', github: 'plataformatec/simple_form'
 gem 'redcarpet'
 
 gem 'ruby-readability'
+gem 'addressable', require: %w[addressable/uri]
 
 group :production do
   gem 'rails_12factor'

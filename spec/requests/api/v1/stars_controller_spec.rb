@@ -4,7 +4,7 @@ RSpec.describe 'api v1 stars', type: :request do
   context 'create action' do
     let(:url) { generate :url }
     let(:html) { generate :page_html }
-    let(:id) { Digest::MD5.hexdigest url }
+    let(:id) { PageIdGenerator.generate_from_url url }
     let!(:stub) { stub_request(:get, url).to_return(body: html) }
     let(:params) { {star: { url: url }, api_key: Figaro.env.api_key} }
 

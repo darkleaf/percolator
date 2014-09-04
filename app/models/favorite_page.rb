@@ -12,8 +12,9 @@ class FavoritePage
   attribute :published_at, DateTime, default: -> (_post, _attr) { DateTime.current }
 
   def url=(value)
-    self.host = 'some_host.com'
-    self.id = Digest::MD5.hexdigest value
+    uri = UriNormalizer.normalized_uri_from_url value
+    self.host = uri.host
+    self.id = PageIdGenerator.generate uri
     super
   end
 
