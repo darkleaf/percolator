@@ -17,5 +17,6 @@
 //= require bootstrap-sprockets
 //= require codemirror
 //= require codemirror/modes/markdown
+//= require codemirror/modes/solr
 //= require codemirror/addons/edit/continuelist
 //= require_tree .
