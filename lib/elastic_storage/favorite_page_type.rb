@@ -20,7 +20,7 @@ module ElasticStorage
           query: {
             query_string: {
               query: post.favorite_pages_query,
-              fields: %w[title^3 keywords^2 description^2 host url content],
+              fields: %w[title^3 keywords^2 description^2 host url],
               lenient: true,
             }
           }
