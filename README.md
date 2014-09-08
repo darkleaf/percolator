@@ -26,5 +26,6 @@ download elasticsearch in elasticsearch folder
 
     heroku config:set PASSWORD=YOU_PASSWORD
     heroku config:set API_KEY=YOU_API_KEY
+    heroku config:set GOOGLE_ANALYTICS=UA-xxxxxx-x
 
     g push heroku master

@@ -32,6 +32,8 @@ gem 'redcarpet'
 gem 'ruby-readability'
 gem 'addressable', require: %w[addressable/uri]
 
+gem 'rack-google-analytics'
+
 group :production do
   gem 'rails_12factor'
 end
