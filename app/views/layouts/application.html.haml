@@ -17,8 +17,8 @@
             %span.icon-bar
           = link_to 'Percolator.io', root_path, class: 'navbar-brand'
         .collapse.navbar-collapse
-          -#%ul.nav.navbar-nav
-          -#  %li
+          %ul.nav.navbar-nav
+            %li= link_to 'Search', search_path
           %ul.nav.navbar-nav.navbar-right
             - if signed_in?
               %li= link_to 'New post', new_post_path

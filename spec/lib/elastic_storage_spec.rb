@@ -158,4 +158,21 @@ RSpec.describe ElasticStorage do
       expect(favorite_pages.first.id).to eq favorite_page.id
     end
   end
+
+  context 'search' do
+    let (:q) { 'test' }
+    let (:post) { build :post, title: 'test' }
+    let (:favorite_page) { build :favorite_page, title: 'test' }
+
+    before :each do
+      ElasticStorage.save_post_command.call post
+      ElasticStorage.save_favorite_page_command.call favorite_page
+    end
+
+    it 'work correctly' do
+      results = ElasticStorage.search_query.call q
+      expect(results.length).to eq 2
+      expect(results.map(&:type)).to contain_exactly('post', 'favorite_page')
+    end
+  end
 end

@@ -45,7 +45,15 @@ module MemoryStorage
   # search
 
   def search_query
-    ->(_) { @posts_storage.values | @pages_storage.values }
+    models = @posts_storage.values | @pages_storage.values
+    search_models = models.map do |m|
+      type = m.class.model_name.singular
+      attrs = m.attributes.slice(:id, :title, :published_at)
+      attrs.merge! type: type
+      SearchResult.new attrs
+    end
+
+    ->(_) { search_models }
   end
 
   def clear_command

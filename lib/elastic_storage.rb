@@ -43,6 +43,12 @@ module ElasticStorage
     FavoritePageType::DestroyCommand
   end
 
+  # search
+
+  def search_query
+    SearchQuery
+  end
+
   #indices
 
   def clear_command
