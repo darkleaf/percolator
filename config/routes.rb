@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   scope module: :web do
     resources :posts
     resources :favorite_pages
+    resource :search
     resource :session
   end
 

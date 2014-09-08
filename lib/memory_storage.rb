@@ -42,6 +42,12 @@ module MemoryStorage
     ->(favorite_page) { @pages_storage.delete favorite_page.id }
   end
 
+  # search
+
+  def search_query
+    ->(_) { @posts_storage.values | @pages_storage.values }
+  end
+
   def clear_command
     Proc.new do
       @posts_storage = {}
