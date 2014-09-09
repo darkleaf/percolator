@@ -15,7 +15,7 @@ module ElasticStorage
 
       def call
         Settings.mappings.each do |type, mapping|
-          client.indices.put_mapping index: :documents, type: type, body: { type => mapping }
+          client.indices.put_mapping index: :documents, type: type, body: { type => mapping }, ignore_conflicts: true
         end
       end
     end
