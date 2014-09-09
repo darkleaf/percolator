@@ -3,6 +3,7 @@ storage: ElasticStorage
 password: password
 api_key: api_key
 google_analytics: UA-xxxxxx-x
+disqus_shortname: short-name
 
 test:
   elasticsearch_url: http://localhost:9201
