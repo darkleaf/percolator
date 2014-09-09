@@ -22,13 +22,19 @@ module ElasticStorage
               type: 'stemmer',
               name: 'light_russian'
             },
+
+            my_word_delimiter: {
+              type: :word_delimiter,
+              preserve_original: true,
+              split_on_numerics: false
+            },
           },
           analyzer: {
             default: {
               type: :custom,
               tokenizer: 'icu_tokenizer',
               char_filter: %w[html_strip],
-              filter: %w[icu_normalizer ru_stop_filter en_stop_filter ru_stem_filter en_stem_filter icu_folding],
+              filter: %w[my_word_delimiter icu_normalizer ru_stop_filter en_stop_filter ru_stem_filter en_stem_filter icu_folding],
             },
           }
         }
