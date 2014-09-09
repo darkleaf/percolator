@@ -1,0 +1,17 @@
+%li.timeline-inverted
+  .timeline-badge.danger
+    %i.glyphicon.glyphicon-paperclip
+  .timeline-panel
+    .timeline-heading
+      %h4.timeline-title
+        = link_to object, object.path
+      %p
+        %small.text-muted
+          %i.glyphicon.glyphicon-time
+          = l object.published_at.to_date, format: :short
+    -#.timeline-body
+    -#  %p
+    -#    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis pharetra varius quam sit amet vulputate.
+    -#    Quisque mauris augue, molestie tincidunt condimentum vitae, gravida a libero. Aenean sit amet felis
+    -#    dolor, in sagittis nisi. Sed ac orci quis tortor imperdiet venenatis. Duis elementum auctor accumsan.
+    -#    Aliquam in felis sit amet augue.

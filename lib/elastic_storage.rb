@@ -49,6 +49,10 @@ module ElasticStorage
     SearchQuery
   end
 
+  def timeline_query
+    TimelineQuery
+  end
+
   #indices
 
   def clear_command

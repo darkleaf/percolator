@@ -29,16 +29,6 @@ module ElasticStorage
       end
     end
 
-    module ByDateQuery
-      extend self
-
-      def call
-        mapping = {favorite_page: Mapper.method(:from_response)}
-        query = {sort: { published_at: { order: :desc }}}
-        LowLevel::SearchQuery.call query, mapping
-      end
-    end
-
     module FindByIdQuery
       extend self
 

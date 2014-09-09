@@ -1,15 +1,6 @@
 require 'rails_helper'
 
 RSpec.describe 'posts', type: :request do
-  context 'index page' do
-    let (:post_model) { create :post }
-
-    it 'render with 200 status' do
-      get "/posts"
-      expect(response).to be_success
-    end
-  end
-
   context 'show page' do
     let (:post_model) { create :post }
 
@@ -46,9 +37,9 @@ RSpec.describe 'posts', type: :request do
 
     it 'create post' do
       post "/posts/", post: post_attrs
-      posts = storage.posts_by_date_query.call
+      posts = storage.search_query.call post_attrs[:title]
       expect(posts.one?).to be true
-      expect(posts.first.attributes.slice(*post_attrs.keys)).to eq post_attrs
+      expect(posts.first.title).to eq(post_attrs[:title])
     end
   end
 

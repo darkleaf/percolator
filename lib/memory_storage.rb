@@ -4,9 +4,6 @@ module MemoryStorage
   @pages_storage = {}
 
   # posts
-  def posts_by_date_query
-    ->{ @posts_storage.values }
-  end
 
   def find_post_by_id_query
     ->(id) { @posts_storage[id] }
@@ -21,10 +18,6 @@ module MemoryStorage
   end
 
   #favorite pages
-
-  def favorite_pages_by_date_query
-    ->{ @pages_storage.values }
-  end
 
   def favorite_pages_for_post_query
     ->(_){ @pages_storage.values }
@@ -44,13 +37,21 @@ module MemoryStorage
 
   # search
 
+  def timeline_query
+    models = @posts_storage.values | @pages_storage.values
+    search_models = models.map do |m|
+      type = m.class.model_name.singular
+      SearchResult.new m.attributes.merge(type: type)
+    end
+
+    -> { search_models }
+  end
+
   def search_query
     models = @posts_storage.values | @pages_storage.values
     search_models = models.map do |m|
       type = m.class.model_name.singular
-      attrs = m.attributes.slice(:id, :title, :published_at)
-      attrs.merge! type: type
-      SearchResult.new attrs
+      SearchResult.new m.attributes.merge(type: type)
     end
 
     ->(_) { search_models }

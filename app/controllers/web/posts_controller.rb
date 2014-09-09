@@ -1,9 +1,5 @@
 class Web::PostsController < Web::ApplicationController
-  skip_before_filter :authenticate!, only: %i[index show]
-
-  def index
-    @posts = storage.posts_by_date_query.call
-  end
+  skip_before_filter :authenticate!, only: %i[show]
 
   def show
     @post = storage.find_post_by_id_query.call params[:id]

@@ -53,29 +53,6 @@ RSpec.describe ElasticStorage do
     end
   end
 
-  context 'posts_by_date_query' do
-    let (:past_post) { build :post, published_at: 1.day.ago.to_datetime }
-    let (:future_post) { build :post, published_at: 1.day.since.to_datetime }
-
-    before :each do
-      ElasticStorage.save_post_command.call past_post
-      ElasticStorage.save_post_command.call future_post
-    end
-
-    it 'work correctly' do
-      posts = ElasticStorage.posts_by_date_query.call
-
-      expect(posts.length).to eq 2
-      expect(posts.first.attributes).to include future_post.attributes
-      expect(posts.last.attributes).to include past_post.attributes
-    end
-  end
-
-
-
-
-
-
   context 'save_favorite_page_command' do
     let (:favorite_page) { build :favorite_page }
 
@@ -122,24 +99,6 @@ RSpec.describe ElasticStorage do
     end
   end
 
-  context 'favorite_pages_by_date_query' do
-    let (:past_favorite_page) { build :favorite_page, published_at: 1.day.ago.to_datetime }
-    let (:future_favorite_page) { build :favorite_page, published_at: 1.day.since.to_datetime }
-
-    before :each do
-      ElasticStorage.save_favorite_page_command.call past_favorite_page
-      ElasticStorage.save_favorite_page_command.call future_favorite_page
-    end
-
-    it 'work correctly' do
-      favorite_pages = ElasticStorage.favorite_pages_by_date_query.call
-
-      expect(favorite_pages.length).to eq 2
-      expect(favorite_pages.first.attributes).to include future_favorite_page.attributes
-      expect(favorite_pages.last.attributes).to include past_favorite_page.attributes
-    end
-  end
-
   context 'favorite_pages_for_post_query' do
     let (:post) { build :post, favorite_pages_query: 'test' }
     let (:favorite_page) { build :favorite_page, title: 'test' }
@@ -171,6 +130,22 @@ RSpec.describe ElasticStorage do
 
     it 'work correctly' do
       results = ElasticStorage.search_query.call q
+      expect(results.length).to eq 2
+      expect(results.map(&:type)).to contain_exactly('post', 'favorite_page')
+    end
+  end
+
+  context 'timeline' do
+    let (:post) { build :post }
+    let (:favorite_page) { build :favorite_page }
+
+    before :each do
+      ElasticStorage.save_post_command.call post
+      ElasticStorage.save_favorite_page_command.call favorite_page
+    end
+
+    it 'work correctly' do
+      results = ElasticStorage.timeline_query.call
       expect(results.length).to eq 2
       expect(results.map(&:type)).to contain_exactly('post', 'favorite_page')
     end
