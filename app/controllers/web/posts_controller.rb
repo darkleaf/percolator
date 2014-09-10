@@ -13,7 +13,7 @@ class Web::PostsController < Web::ApplicationController
   def create
     @post = Post.new post_params
     storage.save_post_command.call @post
-    redirect_to action: :index
+    redirect_to post_path(@post)
   end
 
   def edit
@@ -24,13 +24,13 @@ class Web::PostsController < Web::ApplicationController
     @post = storage.find_post_by_id_query.call params[:id]
     @post.attributes = post_params
     storage.save_post_command.call @post
-    redirect_to action: :index
+    redirect_to post_path(@post)
   end
 
   def destroy
     @post = storage.find_post_by_id_query.call params[:id]
     storage.destroy_post_command.call @post
-    redirect_to action: :index
+    redirect_to root_path
   end
 
 private

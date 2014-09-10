@@ -1,6 +1,8 @@
 require 'rails_helper'
 
 RSpec.describe 'posts', type: :request do
+  before(:each){ sign_in }
+
   context 'show page' do
     let (:post_model) { create :post }
 
@@ -10,9 +12,7 @@ RSpec.describe 'posts', type: :request do
     end
   end
 
-  context 'new page for signed in user' do
-    before(:each){ sign_in }
-
+  context 'new page' do
     it 'render with 200 status' do
       get "/posts/new"
       expect(response).to be_success
@@ -20,8 +20,6 @@ RSpec.describe 'posts', type: :request do
   end
 
   context 'edit page' do
-    before(:each){ sign_in }
-
     let (:post_model) { create :post }
 
     it 'render with 200 status' do
@@ -31,8 +29,6 @@ RSpec.describe 'posts', type: :request do
   end
 
   context 'create action' do
-    before(:each){ sign_in }
-
     let (:post_attrs) { attributes_for :post }
 
     it 'create post' do
@@ -44,8 +40,6 @@ RSpec.describe 'posts', type: :request do
   end
 
   context 'update action' do
-    before(:each){ sign_in }
-
     let (:post_model) { create :post }
     let (:post_attrs) { attributes_for :post }
 
@@ -57,8 +51,6 @@ RSpec.describe 'posts', type: :request do
   end
 
   context 'delete action' do
-    before(:each){ sign_in }
-
     let (:post_model) { create :post }
 
     it 'delete post' do

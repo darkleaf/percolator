@@ -1,19 +1,2 @@
-.container
-  -#.page-header
-  -#  %h1#timeline Bootstrap Timeline
-  -#  %p http://www.facebook.com/sergiomandrake
-  %ul.timeline
-    - @timeline.each do |m|
-      = render m.type, object: m
-
-    -#%li.timeline-inverted
-    -#  .timeline-badge.info
-    -#    %i.glyphicon.glyphicon-play
-    -#  .timeline-panel
-    -#    .timeline-heading
-    -#      %h4.timeline-title
-    -#        Archive
-    -#    .timeline-body
-    -#      %p
-    -#        = link_to 'All posts', search_path(q: '_type: post')
-    -#        = link_to 'All pages', search_path(q: '_type: favorite_page')
+- @timeline.each do |m|
+  = render m.type, object: m

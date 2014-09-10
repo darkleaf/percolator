@@ -3,6 +3,8 @@
 
   %ul.list-inline.text-muted
     %li= @favorite_page.published_at.to_date.to_s :long
+    - if signed_in?
+      %li= link_to 'delete', favorite_page_path(@favorite_page), method: :delete, data: { confirm: "Are you sure?" }
 
 !~ @favorite_page.content
 

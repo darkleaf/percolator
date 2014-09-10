@@ -8,6 +8,6 @@ class Web::FavoritePagesController < Web::ApplicationController
   def destroy
     @favorite_page = storage.find_favorite_page_by_id_query.call params[:id]
     storage.destroy_favorite_page_command.call @favorite_page
-    redirect_to action: :index
+    redirect_to root_path
   end
 end

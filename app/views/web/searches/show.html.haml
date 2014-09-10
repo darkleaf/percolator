@@ -4,7 +4,6 @@
     %span.input-group-btn
       = submit_tag 'Search', class: 'btn btn-default'
 
-- @search_results.each do |item|
-  %div
-    = link_to item, item.path
-    = l item.published_at.to_date, format: :short
+- @search_results.each do |m|
+  = render m.type, object: m
+
