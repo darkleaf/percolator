@@ -30,5 +30,6 @@ download elasticsearch in elasticsearch folder
     heroku config:set API_KEY=YOU_API_KEY
     heroku config:set GOOGLE_ANALYTICS=UA-xxxxxx-x
     heroku config:set DISQUS_SHORTNAME=SOME_NAME
+    heroku config:set NEW_RELIC_APP_NAME=YOU_NICK_NAME-percolator
 
     g push heroku master
