@@ -23,6 +23,7 @@ download elasticsearch in elasticsearch folder
     heroku apps:create YOU_NICK_NAME-percolator
     heroku addons:add bonsai
     heroku addons:add newrelic:stark
+    heroku addons:add rollbar
     #remove postgresql addon ?
 
     heroku config:set PASSWORD=YOU_PASSWORD

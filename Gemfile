@@ -39,6 +39,7 @@ group :production do
 end
 
 gem 'newrelic_rpm'
+gem 'rollbar'
 
 group :development, :test do
   gem 'rspec-rails', '~> 3.0.0'
