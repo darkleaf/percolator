@@ -24,7 +24,7 @@
               %li= link_to 'New post', new_post_path
               %li= link_to 'Sign out', session_path, method: :delete
             - if signed_out?
-              %li= link_to 'Sign in', data: {target: "#sign_in", toggle: "modal"}
+              %li= link_to 'Sign in', '#', data: {target: "#sign_in", toggle: "modal"}
     .container
       = yield
     = render 'web/shared/sign_in'
