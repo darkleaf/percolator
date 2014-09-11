@@ -22,6 +22,7 @@ class Post
   end
 
   def similar_query
+    return '' if favorite_pages_query.blank?
     "NOT (_id: #{id}) AND (#{favorite_pages_query})"
   end
 end
