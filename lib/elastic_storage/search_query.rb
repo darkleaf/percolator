@@ -7,6 +7,8 @@ module ElasticStorage
       query = {
         _source: %w[title published_at],
         highlight: {
+          pre_tags: %w[<strong>],
+          post_tags: %w[</strong>],
           fields: {
             title: { number_of_fragments: 0 },
             content: { fragment_size: 100, number_of_fragments: 3 }
