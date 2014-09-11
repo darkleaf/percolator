@@ -17,6 +17,7 @@ gem 'codemirror-rails'
 gem 'turbolinks'
 
 gem 'virtus'
+gem 'hashie'
 gem 'elasticsearch'
 
 gem 'sucker_punch'

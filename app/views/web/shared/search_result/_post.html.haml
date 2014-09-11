@@ -1,0 +1,4 @@
+.bs-preview.bs-preview-danger
+  %h4= link_to object.to_s.html_safe, object.path
+  %p= l object.published_at.to_date, format: :long
+  %p!= object.highlighted_content

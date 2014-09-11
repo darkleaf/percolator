@@ -5,5 +5,4 @@
       = submit_tag 'Search', class: 'btn btn-default'
 
 - @search_results.each do |m|
-  = render m.type, object: m
-
+  = render "web/shared/search_result/#{m.type}", object: m

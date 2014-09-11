@@ -9,7 +9,7 @@ module ElasticStorage
         params.merge! ignore: [404] if silent
         response = client.get params
         return unless response
-        mapper.call id, response['_source']
+        mapper.call Hashie::Mash.new(response)
       rescue Elasticsearch::Transport::Transport::Errors::NotFound
         raise NotFound
       end
@@ -32,7 +32,7 @@ module ElasticStorage
         response['hits']['hits'].map do |hit|
           type = hit['_type']
           mapper = mapping[type]
-          mapper.call hit['_id'], hit['_source']
+          mapper.call Hashie::Mash.new(hit)
         end
       end
     end

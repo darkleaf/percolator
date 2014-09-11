@@ -4,6 +4,7 @@ module ElasticStorage
 
     def call
       query = {
+        _source: %w[title published_at],
         sort: { published_at: { order: :desc }},
       }
       LowLevel::SearchQuery.call query, mapping
@@ -12,8 +13,8 @@ module ElasticStorage
   private
     def mapping
       {
-        post: ->(id, attrs){ SearchResult.new attrs.merge(id: id, type: 'post') },
-        favorite_page: ->(id, attrs){ SearchResult.new attrs.merge(id: id, type: 'favorite_page') },
+        post: ->(hit){ Preview.new hit._source.merge(id: hit._id, type: 'post') },
+        favorite_page: ->(hit){ Preview.new hit._source.merge(id: hit._id, type: 'favorite_page') },
       }
     end
   end

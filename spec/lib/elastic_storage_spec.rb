@@ -99,25 +99,6 @@ RSpec.describe ElasticStorage do
     end
   end
 
-  context 'favorite_pages_for_post_query' do
-    let (:post) { build :post, favorite_pages_query: 'test' }
-    let (:favorite_page) { build :favorite_page, title: 'test' }
-    let (:another_favorite_page) { build :favorite_page }
-
-    before :each do
-      ElasticStorage.save_post_command.call post
-      ElasticStorage.save_favorite_page_command.call favorite_page
-      ElasticStorage.save_favorite_page_command.call another_favorite_page
-    end
-
-    it 'work correctly' do
-      favorite_pages = ElasticStorage.favorite_pages_for_post_query.call post
-
-      expect(favorite_pages.length).to eq 1
-      expect(favorite_pages.first.id).to eq favorite_page.id
-    end
-  end
-
   context 'search' do
     let (:q) { 'test' }
     let (:post) { build :post, title: 'test' }

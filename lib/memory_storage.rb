@@ -19,10 +19,6 @@ module MemoryStorage
 
   #favorite pages
 
-  def favorite_pages_for_post_query
-    ->(_){ @pages_storage.values }
-  end
-
   def find_favorite_page_by_id_query
     ->(id) { @pages_storage[id] }
   end
@@ -41,7 +37,7 @@ module MemoryStorage
     models = @posts_storage.values | @pages_storage.values
     search_models = models.map do |m|
       type = m.class.model_name.singular
-      SearchResult.new m.attributes.merge(type: type)
+      Preview.new m.attributes.merge(type: type)
     end
 
     -> { search_models }

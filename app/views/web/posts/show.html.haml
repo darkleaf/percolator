@@ -8,8 +8,7 @@
       %li= link_to 'delete', post_path(@post), method: :delete, data: { confirm: "Are you sure?" }
 ~ markdown @post.content
 
-- @favorite_pages.each do |page|
-  = link_to page, favorite_page_path(page)
-
+- @materials.each do |m|
+  = render "web/shared/search_result/#{m.type}", object: m
 
 = render 'web/shared/disqus'

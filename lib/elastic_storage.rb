@@ -5,10 +5,6 @@ module ElasticStorage
 
   # posts
 
-  def posts_by_date_query
-    PostType::ByDateQuery
-  end
-
   def find_post_by_id_query
     PostType::FindByIdQuery
   end
@@ -22,14 +18,6 @@ module ElasticStorage
   end
 
   # favorite pages
-
-  def favorite_pages_by_date_query
-    FavoritePageType::ByDateQuery
-  end
-
-  def favorite_pages_for_post_query
-    FavoritePageType::ForPostQuery
-  end
 
   def find_favorite_page_by_id_query
     FavoritePageType::FindByIdQuery

@@ -5,6 +5,13 @@ module ElasticStorage
     def call(q)
       return [] if q.blank?
       query = {
+        _source: %w[title published_at],
+        highlight: {
+          fields: {
+            title: { number_of_fragments: 0 },
+            content: { fragment_size: 100, number_of_fragments: 3 }
+          },
+        },
         sort: ['_score', { published_at: { order: :desc }}],
         query: {
           query_string: {
@@ -20,8 +27,17 @@ module ElasticStorage
   private
     def mapping
       {
-        post: ->(id, attrs){ SearchResult.new attrs.merge(id: id, type: 'post') },
-        favorite_page: ->(id, attrs){ SearchResult.new attrs.merge(id: id, type: 'favorite_page') },
+        post:          ->(hit){ SearchResult.new attrs_from_hit(hit).merge(type: 'post') },
+        favorite_page: ->(hit){ SearchResult.new attrs_from_hit(hit).merge(type: 'favorite_page') },
+      }
+    end
+
+    def attrs_from_hit(hit)
+      {
+        id: hit._id,
+        title: hit.highlight.try(:title).try(:join, ' ') || hit._source.title,
+        published_at: hit._source.published_at,
+        highlighted_content: hit.highlight.try(:content).try(:join, ' ')
       }
     end
   end

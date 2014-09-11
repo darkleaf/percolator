@@ -1,0 +1,5 @@
+.bs-preview.bs-preview-info
+  %h4= link_to object.to_s.html_safe
+  %p= l object.published_at.to_date, format: :long
+  - if object.highlighted_content.present?
+    %p!= object.highlighted_content

@@ -3,9 +3,9 @@ module ElasticStorage
     module Mapper
       extend self
 
-      def from_response(id, source)
-        post = Post.new source
-        post.send 'id=', id
+      def from_response(hit)
+        post = Post.new hit._source
+        post.send 'id=', hit._id
         post
       end
     end

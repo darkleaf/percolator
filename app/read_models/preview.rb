@@ -1,10 +1,9 @@
-class SearchResult
+class Preview
   include Virtus.model
 
   attribute :id
   attribute :title
   attribute :published_at, DateTime
-  attribute :highlighted_content
   attribute :type
 
   delegate :url_helpers, to: 'Rails.application.routes'

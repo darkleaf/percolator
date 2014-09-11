@@ -100,6 +100,7 @@ GEM
     guess_html_encoding (0.0.9)
     haml (4.0.5)
       tilt
+    hashie (3.3.1)
     highline (1.6.21)
     hike (1.2.3)
     i18n (0.6.11)
@@ -239,6 +240,7 @@ DEPENDENCIES
   figaro
   foreman
   haml
+  hashie
   highline
   jquery-rails
   jquery-turbolinks

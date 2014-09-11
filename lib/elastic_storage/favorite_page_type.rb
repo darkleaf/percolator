@@ -3,29 +3,10 @@ module ElasticStorage
     module Mapper
       extend self
 
-      def from_response(id, source)
-        favorite_page = FavoritePage.new source
-        favorite_page.send 'id=', id
+      def from_response(hit)
+        favorite_page = FavoritePage.new hit._source
+        favorite_page.send 'id=', hit._id
         favorite_page
-      end
-    end
-
-    module ForPostQuery
-      extend self
-
-      def call(post)
-        return [] if post.favorite_pages_query.blank?
-        mapping = {favorite_page: Mapper.method(:from_response)}
-        query = {
-          query: {
-            query_string: {
-              query: post.favorite_pages_query,
-              fields: %w[title^3 keywords^2 description^2 host url],
-              lenient: true,
-            }
-          }
-        }
-        LowLevel::SearchQuery.call query, mapping
       end
     end
 
