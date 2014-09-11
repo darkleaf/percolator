@@ -3,7 +3,7 @@ class Web::PostsController < Web::ApplicationController
 
   def show
     @post = storage.find_post_by_id_query.call params[:id]
-    @materials = storage.search_query.call @post.favorite_pages_query
+    @materials = storage.search_query.call @post.similar_query
   end
 
   def new
