@@ -6,3 +6,5 @@
 
 - @search_results.each do |m|
   = render "web/shared/search_result/#{m.type}", object: m
+
+= paginate @search_results, theme: 'twitter-bootstrap-3'

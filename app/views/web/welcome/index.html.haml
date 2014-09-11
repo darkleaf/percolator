@@ -1,2 +1,4 @@
 - @timeline.each do |m|
   = render "web/shared/preview/#{m.type}", object: m
+
+= paginate @timeline, theme: 'twitter-bootstrap-3'

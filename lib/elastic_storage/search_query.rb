@@ -2,8 +2,8 @@ module ElasticStorage
   module SearchQuery
     extend self
 
-    def call(q)
-      return [] if q.blank?
+    def call(q, page: nil, per_page: nil)
+      return StorageCollection.new([]) if q.blank?
       query = {
         _source: %w[title published_at],
         highlight: {
@@ -23,7 +23,7 @@ module ElasticStorage
           }
         }
       }
-      LowLevel::SearchQuery.call query, mapping
+      LowLevel::SearchQuery.call query, mapping, page: page, per_page: per_page
     end
 
   private

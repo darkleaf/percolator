@@ -40,7 +40,7 @@ module MemoryStorage
       Preview.new m.attributes.merge(type: type)
     end
 
-    -> { search_models }
+    ->(page: nil, per_page: nil) { StorageCollection.new search_models }
   end
 
   def search_query
@@ -50,7 +50,7 @@ module MemoryStorage
       SearchResult.new m.attributes.merge(type: type)
     end
 
-    ->(_) { search_models }
+    ->(_, page: nil, per_page: nil) { StorageCollection.new search_models }
   end
 
   def clear_command

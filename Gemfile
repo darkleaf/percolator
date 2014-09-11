@@ -30,6 +30,9 @@ gem 'simple_form', github: 'plataformatec/simple_form'
 
 gem 'redcarpet'
 
+gem 'kaminari'
+gem 'bootstrap-kaminari-views'
+
 gem 'ruby-readability'
 gem 'addressable', require: %w[addressable/uri]
 

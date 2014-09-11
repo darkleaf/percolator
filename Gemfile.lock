@@ -43,6 +43,9 @@ GEM
       descendants_tracker (~> 0.0.4)
       ice_nine (~> 0.11.0)
       thread_safe (~> 0.3, >= 0.3.1)
+    bootstrap-kaminari-views (0.0.5)
+      kaminari (>= 0.13)
+      rails (>= 3.1)
     bootstrap-sass (3.2.0.1)
       sass (~> 3.2)
     builder (3.2.2)
@@ -112,6 +115,9 @@ GEM
       railties (>= 3.1.0)
       turbolinks
     json (1.8.1)
+    kaminari (0.15.1)
+      actionpack (>= 3.0.0)
+      activesupport (>= 3.0.0)
     libv8 (3.16.14.3)
     mail (2.5.4)
       mime-types (~> 1.16)
@@ -231,6 +237,7 @@ PLATFORMS
 DEPENDENCIES
   addressable
   autoprefixer-rails
+  bootstrap-kaminari-views
   bootstrap-sass
   codeclimate-test-reporter
   codemirror-rails
@@ -244,6 +251,7 @@ DEPENDENCIES
   highline
   jquery-rails
   jquery-turbolinks
+  kaminari
   newrelic_rpm
   rack-google-analytics
   rails (= 4.1.5)

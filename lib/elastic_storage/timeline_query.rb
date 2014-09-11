@@ -2,12 +2,12 @@ module ElasticStorage
   module TimelineQuery
     extend self
 
-    def call
+    def call(page: nil, per_page: nil)
       query = {
         _source: %w[title published_at],
         sort: { published_at: { order: :desc }},
       }
-      LowLevel::SearchQuery.call query, mapping
+      LowLevel::SearchQuery.call query, mapping, page: page, per_page: per_page
     end
 
   private

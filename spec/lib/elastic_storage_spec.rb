@@ -111,7 +111,7 @@ RSpec.describe ElasticStorage do
 
     it 'work correctly' do
       results = ElasticStorage.search_query.call q
-      expect(results.length).to eq 2
+      expect(results.count).to eq 2
       expect(results.map(&:type)).to contain_exactly('post', 'favorite_page')
     end
   end
@@ -127,7 +127,7 @@ RSpec.describe ElasticStorage do
 
     it 'work correctly' do
       results = ElasticStorage.timeline_query.call
-      expect(results.length).to eq 2
+      expect(results.count).to eq 2
       expect(results.map(&:type)).to contain_exactly('post', 'favorite_page')
     end
   end
