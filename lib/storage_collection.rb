@@ -19,6 +19,6 @@ class StorageCollection
 
   def total_pages
     return 1 if limit_value == 0
-    total_count / limit_value
+    (total_count.to_f / limit_value.to_f).ceil
   end
 end
