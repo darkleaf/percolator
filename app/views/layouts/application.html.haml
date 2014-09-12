@@ -19,6 +19,8 @@
         .collapse.navbar-collapse
           %ul.nav.navbar-nav
             %li= link_to 'Search', search_path
+            %li= link_to 'Posts', search_path(q: '_type: post')
+            %li= link_to 'Favorite pages', search_path(q: '_type: favorite_page')
           %ul.nav.navbar-nav.navbar-right
             - if signed_in?
               %li= link_to 'New post', new_post_path
