@@ -13,8 +13,8 @@ module ElasticStorage
   private
     def mapping
       {
-        post: ->(hit){ Preview.new hit._source.merge(id: hit._id, type: 'post') },
-        favorite_page: ->(hit){ Preview.new hit._source.merge(id: hit._id, type: 'favorite_page') },
+        post:          ->(hit){ Preview.load_from_hash hit._source.merge(id: hit._id, type: 'post') },
+        favorite_page: ->(hit){ Preview.load_from_hash hit._source.merge(id: hit._id, type: 'favorite_page') },
       }
     end
   end

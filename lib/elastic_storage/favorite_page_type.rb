@@ -4,9 +4,7 @@ module ElasticStorage
       extend self
 
       def from_response(hit)
-        favorite_page = FavoritePage.new hit._source
-        favorite_page.send 'id=', hit._id
-        favorite_page
+        FavoritePage.load_from_hash hit._source.merge(id: hit._id)
       end
     end
 

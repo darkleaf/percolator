@@ -29,8 +29,8 @@ module ElasticStorage
   private
     def mapping
       {
-        post:          ->(hit){ SearchResult.new attrs_from_hit(hit).merge(type: 'post') },
-        favorite_page: ->(hit){ SearchResult.new attrs_from_hit(hit).merge(type: 'favorite_page') },
+        post:          ->(hit){ SearchResult.load_from_hash attrs_from_hit(hit).merge(type: 'post') },
+        favorite_page: ->(hit){ SearchResult.load_from_hash attrs_from_hit(hit).merge(type: 'favorite_page') },
       }
     end
 

@@ -4,9 +4,7 @@ module ElasticStorage
       extend self
 
       def from_response(hit)
-        post = Post.new hit._source
-        post.send 'id=', hit._id
-        post
+        Post.load_from_hash hit._source.merge(id: hit._id)
       end
     end
 

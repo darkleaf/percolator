@@ -1,6 +1,5 @@
 class FavoritePage
-  extend ActiveModel::Naming
-  include Virtus.model
+  include Model
 
   attribute :id, String, writer: :private
   attribute :url, String
@@ -16,14 +15,6 @@ class FavoritePage
     self.host = uri.host
     self.id = PageIdGenerator.generate uri
     super
-  end
-
-  def to_key
-    [id]
-  end
-
-  def to_param
-    id
   end
 
   def to_s

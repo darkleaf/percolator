@@ -1,5 +1,5 @@
 class SearchResult
-  include Virtus.model
+  include Model
 
   attribute :id
   attribute :title
