@@ -21,7 +21,7 @@ gem 'hashie'
 gem 'elasticsearch'
 
 gem 'sucker_punch'
-
+gem 'unicorn'
 gem 'figaro'
 
 gem 'highline', require: 'highline/import'
