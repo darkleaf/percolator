@@ -32,12 +32,22 @@ private
   end
 
   def make_absolute_links(html, base_uri)
-    url_r = /(?<relative_path>\/\S*?)/
-    regexp = /(?<attribute>href|src)=('#{url_r}'|"#{url_r}")/
+    # dont work with: src="img.jpg"
+    # page coolsite.com/category/page.html
+    # correct result:  coolsite.com/category/img.jpg
+    # return coolsite.com/img.jpg
 
-    html.gsub regexp do
-      uri = Addressable::URI.join(base_uri.site, $~[:relative_path])
-      "#{$~[:attribute]}=\"#{uri}\""
+    regexp = /(?<attribute>href|src)\s*=\s*(?<q>"|')(?<path>\S+?)\k<q>/
+
+    html.gsub regexp do |match|
+      uri_path = Addressable::URI.parse $~[:path]
+
+      if uri_path.relative?
+        uri = Addressable::URI.join(base_uri.site, uri_path)
+        "#{$~[:attribute]}=\"#{uri}\""
+      else
+        match
+      end
     end
   end
 end
