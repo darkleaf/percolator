@@ -164,6 +164,7 @@ GEM
     ref (1.0.5)
     rollbar (1.0.1)
       multi_json (~> 1.3)
+    rouge (1.6.2)
     rspec-core (3.0.4)
       rspec-support (~> 3.0.0)
     rspec-expectations (3.0.4)
@@ -264,6 +265,7 @@ DEPENDENCIES
   rails_12factor
   redcarpet
   rollbar
+  rouge
   rspec-rails (~> 3.0.0)
   ruby-readability
   sass-rails (~> 4.0.3)
