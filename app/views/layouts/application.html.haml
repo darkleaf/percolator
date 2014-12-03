@@ -26,6 +26,7 @@
               %li= link_to 'New post', new_post_path
               %li= link_to 'Sign out', session_path, method: :delete
             - if signed_out?
+              %li= link_to 'Project on Github', 'https://github.com/darkleaf/percolator', target: '_blank'
               %li= link_to 'Sign in', '#', data: {target: "#sign_in", toggle: "modal"}
     .container
       = yield
