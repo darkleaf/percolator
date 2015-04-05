@@ -24,7 +24,6 @@ download elasticsearch in elasticsearch folder
     heroku addons:add bonsai
     heroku addons:add newrelic:stark
     heroku addons:add rollbar
-    #remove postgresql addon ?
 
     heroku config:set PASSWORD=YOU_PASSWORD
     heroku config:set API_KEY=YOU_API_KEY
