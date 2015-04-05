@@ -2,14 +2,15 @@ module ElasticStorage
   module LowLevel
 
     mattr_reader(:index_name){ [:documents, Rails.env].join('_') }
+    mattr_accessor(:need_index_refresh){ false }
     module_function
 
     def put(type, id, document)
-      client.index index: index_name, type: type, id: id, body: document, refresh: true
+      client.index index: index_name, type: type, id: id, body: document, refresh: need_index_refresh
     end
 
     def delete(type, id)
-      client.delete index: index_name, type: type, id: id, refresh: true
+      client.delete index: index_name, type: type, id: id, refresh: need_index_refresh
     end
 
     def get(type, id)

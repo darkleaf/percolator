@@ -22,6 +22,7 @@ Dir[Rails.root.join("spec/support/**/*.rb")].each { |f| require f }
 WebMock.disable_net_connect!(allow_localhost: true, allow: 'codeclimate.com')
 
 ActiveRecord::Migration.maintain_test_schema!
+ElasticStorage.need_index_refresh = true
 
 RSpec.configure do |config|
   config.include FactoryGirl::Syntax::Methods
