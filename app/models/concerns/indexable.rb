@@ -16,7 +16,7 @@ module Indexable
 
   private
   def put_to_index
-    ElasticStorage.put_to_index self, refresh: true
+    ElasticStorage.put_to_index self#, refresh: true
   end
 
   def delete_from_index
