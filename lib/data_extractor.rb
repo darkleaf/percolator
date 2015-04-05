@@ -20,6 +20,6 @@ module DataExtractor
   end
 
   def keywords(html)
-    html.search('/html/head/meta[@name="keywords"]/@content').first.try(:value).to_s.split(',')
+    html.search('/html/head/meta[@name="keywords"]/@content').first.try(:value).to_s.split(',').map(&:strip)
   end
 end
