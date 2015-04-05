@@ -11,12 +11,20 @@ module ElasticStorage
   end
 
   def put_to_index(model)
-    document = ModelToDocument.const_get(model.class.to_s, false).call model
-    low_level.put model.model_name.singular, model.id, document
+    batch = Array.wrap(model).map do |m|
+      document = ModelToDocument.const_get(m.class.to_s, false).call m
+      { _type: m.model_name.singular, _id: m.id, data: document }
+    end
+
+    low_level.put batch
   end
 
   def delete_from_index(model)
-    low_level.delete model.model_name.singular, model.id
+    batch = Array.wrap(model).map do |m|
+      { _type: m.model_name.singular, _id: m.id }
+    end
+
+    low_level.delete batch
   end
 
   def get(type, raw_id)

@@ -5,12 +5,16 @@ module ElasticStorage
     mattr_accessor(:need_index_refresh){ false }
     module_function
 
-    def put(type, id, document)
-      client.index index: index_name, type: type, id: id, body: document, refresh: need_index_refresh
+    def put(batch)
+      bulk batch.map{ |b| { index: b } }
     end
 
-    def delete(type, id)
-      client.delete index: index_name, type: type, id: id, refresh: need_index_refresh
+    def delete(batch)
+      bulk batch.map{ |b| { delete: b } }
+    end
+
+    def bulk(body)
+      client.bulk index: index_name, body: body, refresh: need_index_refresh
     end
 
     def get(type, id)
