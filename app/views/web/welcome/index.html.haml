@@ -1,4 +1,10 @@
-- @timeline.each do |m|
-  = render "web/shared/preview/#{m.type}", object: m
+= form_tag root_path, method: :get do
+  .input-group
+    = search_field_tag :q, params[:q], class: 'form-control'
+    %span.input-group-btn
+      = submit_tag 'Search', class: 'btn btn-default'
 
-= paginate @timeline, theme: 'twitter-bootstrap-3'
+- @results.each do |m|
+  = render m.model_name.singular, object: m
+
+= paginate @results, theme: 'twitter-bootstrap-3'

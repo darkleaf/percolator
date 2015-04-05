@@ -1,13 +1,10 @@
-class FavoritePageView
+class FavoritePageSearchView
   include ViewModel
 
   attribute :id, String
   attribute :url, String
-  attribute :host, String
   attribute :title, String
-  attribute :description, String
-  attribute :keywords, Array[String]
-  attribute :content, String
+  attribute :highlighted_content, String
   attribute :published_at, DateTime
 
   def to_s

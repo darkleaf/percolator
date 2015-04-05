@@ -30,6 +30,7 @@ gem "responders"
 
 gem 'redcarpet'
 gem 'meta-tags'
+gem 'rails-i18n'
 
 gem 'kaminari'
 gem 'bootstrap-kaminari-views'
