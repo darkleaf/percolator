@@ -1,10 +1,6 @@
 require 'rails_helper'
 
 RSpec.describe ElasticStorage do
-  after :each do
-    ElasticStorage.clear
-  end
-
   context 'search' do
     let(:q) { 'test' }
     let!(:post) { create :post, title: 'test' }
