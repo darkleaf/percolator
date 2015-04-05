@@ -1,9 +1,9 @@
 .bs-preview.bs-preview-danger
-  %h4= link_to object.to_s.html_safe, post_path(object)
+  %h4= link_to object, post_path(object)
   %ul.list-inline.text-muted
     %li= l object.published_at.to_date, format: :long
     - if signed_in?
       %li= link_to 'edit', edit_post_path(object)
       %li= link_to 'delete', post_path(object), method: :delete, data: { confirm: "Are you sure?" }
   - if object.highlighted_content.present?
-    %p!= sanitize object.highlighted_content, tags: %w[em strong]
+    %p= sanitize object.highlighted_content, tags: %w[em strong]
