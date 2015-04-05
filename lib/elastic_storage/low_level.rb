@@ -11,10 +11,8 @@ module ElasticStorage
       client.delete index: index_name, type: type, id: id, refresh: true
     end
 
-    def get(type, id, silent: false)
-      params = { index: index_name, type: type, id: id }
-      params.merge! ignore: [404] if silent
-      responce = client.get params
+    def get(type, id)
+      responce = client.get index: index_name, type: type, id: id
       responce['_source']
     rescue Elasticsearch::Transport::Transport::Errors::NotFound
       raise NotFound
