@@ -24,21 +24,21 @@ module ElasticStorage
       responce['hits']
     end
 
-    def create_indices_command
+    def create_index
       client.indices.create index: index_name, body: { settings: Settings.settings }
     end
 
-    def put_mappings_command
+    def put_mappings
       Settings.mappings.each do |type, mapping|
         client.indices.put_mapping index: index_name, type: type, body: { type => mapping }, ignore_conflicts: true
       end
     end
 
-    def remove_indices_command
-      client.indices.delete index: '_all'
+    def remove_index
+      client.indices.delete index: index_name, ignore: [404]
     end
 
-    def clear_command
+    def clear
       client.delete_by_query index: index_name, body: { query: { match_all: {} } }
     end
 

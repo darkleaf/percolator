@@ -6,10 +6,10 @@ module ElasticStorage
   module_function
 
   class << self
-    delegate :put_mappings_command,
-             :remove_indices_command,
-             :create_indices_command,
-             :clear_command,
+    delegate :put_mappings,
+             :remove_index,
+             :create_index,
+             :clear,
              to: :low_level
   end
 

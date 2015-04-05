@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe ElasticStorage do
   after :each do
-    ElasticStorage.clear_command
+    ElasticStorage.clear
   end
 
   context 'search' do

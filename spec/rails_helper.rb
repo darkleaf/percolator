@@ -53,20 +53,20 @@ RSpec.configure do |config|
     DatabaseCleaner.strategy = :truncation
     DatabaseCleaner.clean_with(:truncation)
 
-    ElasticStorage.remove_indices_command
-    ElasticStorage.create_indices_command
-    ElasticStorage.put_mappings_command
+    ElasticStorage.remove_index
+    ElasticStorage.create_index
+    ElasticStorage.put_mappings
   end
 
   config.after :suite do
-    ElasticStorage.remove_indices_command
+    ElasticStorage.remove_index
   end
 
   config.around(:each) do |example|
     DatabaseCleaner.cleaning do
       example.run
     end
-    ElasticStorage.clear_command
+    ElasticStorage.clear
   end
 end
 
