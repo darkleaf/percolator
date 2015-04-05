@@ -11,13 +11,26 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150405100233) do
+ActiveRecord::Schema.define(version: 20150405121014) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "posts", force: true do |t|
-    t.string   "title"
+  create_table "favorite_pages", force: :cascade do |t|
+    t.string   "url_digest"
+    t.text     "url"
+    t.text     "title"
+    t.text     "description"
+    t.text     "keywords",    default: [], null: false, array: true
+    t.text     "content"
+    t.datetime "created_at",               null: false
+    t.datetime "updated_at",               null: false
+  end
+
+  add_index "favorite_pages", ["url_digest"], name: "index_favorite_pages_on_url_digest", unique: true, using: :btree
+
+  create_table "posts", force: :cascade do |t|
+    t.string   "title",          limit: 255
     t.text     "content"
     t.text     "relative_query"
     t.datetime "created_at"
