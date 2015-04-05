@@ -1,9 +1,8 @@
 class Post < ActiveRecord::Base
+  include Indexable
+
   validates :title, presence: true
   validates :content, presence: true
-
-  after_commit :put_to_index, on: %i[create update]
-  after_commit :delete_from_index, on: :destroy
 
   def relative_query_without_self
     return '' if relative_query.blank?
@@ -16,14 +15,5 @@ class Post < ActiveRecord::Base
 
   def to_s
     title
-  end
-
-  private
-  def put_to_index
-    PutToIndexJob.new.async.perform(self)
-  end
-
-  def delete_from_index
-    DeleteFromIndexJob.new.async.perform(self)
   end
 end
