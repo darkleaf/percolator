@@ -1,5 +1,5 @@
 .bs-preview.bs-preview-danger
-  %h4= link_to object, post_path(object)
+  %h4= link_to object.to_s.html_safe, post_path(object)
   %ul.list-inline.text-muted
     %li= l object.published_at.to_date, format: :long
     - if signed_in?

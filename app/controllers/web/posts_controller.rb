@@ -3,7 +3,12 @@ class Web::PostsController < Web::ApplicationController
 
   def show
     @post = ElasticStorage.get(:post, params[:id])
-    @materials = []#storage.search_query.call @post.similar_query
+    @materials =
+      if @post.relative_query_without_self.present?
+        ElasticStorage::SearchQuery.call @post.relative_query_without_self, per_page: 5
+      else
+        StorageCollection.new []
+      end
   end
 
   def new

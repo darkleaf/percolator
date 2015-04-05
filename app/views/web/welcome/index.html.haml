@@ -5,6 +5,6 @@
       = submit_tag 'Search', class: 'btn btn-default'
 
 - @results.each do |m|
-  = render m.model_name.singular, object: m
+  = render "web/shared/search_result/#{m.model_name.singular}", object: m
 
 = paginate @results, theme: 'twitter-bootstrap-3'

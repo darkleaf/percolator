@@ -9,6 +9,7 @@ module ElasticStorage
           title: post.title,
           content: content_result[:output].to_s,
           published_at: post.created_at,
+          relative_query_without_self: post.relative_query_without_self
         }
       end
     end
