@@ -24,7 +24,6 @@ WebMock.disable_net_connect!(allow_localhost: true, allow: 'codeclimate.com')
 ActiveRecord::Migration.maintain_test_schema!
 
 RSpec.configure do |config|
-  config.include ServiceLocator
   config.include FactoryGirl::Syntax::Methods
 
   # RSpec Rails can automatically mix in different behaviours to your tests
@@ -67,7 +66,7 @@ RSpec.configure do |config|
     DatabaseCleaner.cleaning do
       example.run
     end
-    storage.clear_command
+    ElasticStorage.clear_command
   end
 end
 
