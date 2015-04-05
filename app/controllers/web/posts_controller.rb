@@ -6,6 +6,10 @@ class Web::PostsController < Web::ApplicationController
     @materials = storage.search_query.call @post.similar_query
   end
 
+  def index
+    @posts = Post.all
+  end
+
   def new
     @post = Post.new
   end
