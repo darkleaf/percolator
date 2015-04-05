@@ -23,12 +23,12 @@ gem 'sucker_punch'
 gem 'unicorn'
 gem 'figaro'
 
-gem 'highline', require: 'highline/import'
-
 gem 'simple_form', github: 'plataformatec/simple_form'
 gem "responders"
 
-gem 'redcarpet'
+gem 'html-pipeline'
+gem 'github-markdown'
+
 gem 'meta-tags'
 gem 'rails-i18n'
 

@@ -4,9 +4,10 @@ module ElasticStorage
       module_function
 
       def call(post)
+        content_result = PostHtmlPipeline.call(post.content)
         {
           title: post.title,
-          content: post.content,
+          content: content_result[:output].to_s,
           published_at: post.created_at,
         }
       end
