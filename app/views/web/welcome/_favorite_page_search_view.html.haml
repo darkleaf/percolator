@@ -1,5 +1,8 @@
 .bs-preview.bs-preview-info
   %h4= link_to object.to_s.html_safe, object.url, target: '_blank'
-  %p= l object.published_at.to_date, format: :long
+  %ul.list-inline.text-muted
+    %li= l object.published_at.to_date, format: :long
+    - if signed_in?
+      %li= link_to 'delete', favorite_page_path(object), method: :delete, data: { confirm: "Are you sure?" }
   - if object.highlighted_content.present?
     %p!= sanitize object.highlighted_content, tags: %w[em strong]
