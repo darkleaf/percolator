@@ -2,8 +2,8 @@ class Web::PostsController < Web::ApplicationController
   skip_before_filter :authenticate!, only: %i[show]
 
   def show
-    @post = storage.find_post_by_id_query.call params[:id]
-    @materials = storage.search_query.call @post.similar_query
+    @post = ElasticStorage.get(:post, params[:id])
+    @materials = []#storage.search_query.call @post.similar_query
   end
 
   def index

@@ -14,43 +14,49 @@ module ElasticStorage
     low_level.delete_from_index model.model_name.singular, model.id
   end
 
-  # posts
-
-  def find_post_by_id_query
-    PostType::FindByIdQuery
+  def get(type, raw_id)
+    id = raw_id.to_s.split('-').first
+    document = low_level.get(type, id)
+    "#{type}_view".camelcase.constantize.load(id, document)
   end
 
-  def save_post_command
-    PostType::SaveCommand
-  end
-
-  def destroy_post_command
-    PostType::DestroyCommand
-  end
-
-  # favorite pages
-
-  def find_favorite_page_by_id_query
-    FavoritePageType::FindByIdQuery
-  end
-
-  def save_favorite_page_command
-    FavoritePageType::SaveCommand
-  end
-
-  def destroy_favorite_page_command
-    FavoritePageType::DestroyCommand
-  end
-
-  # search
-
-  def search_query
-    SearchQuery
-  end
-
-  def timeline_query
-    TimelineQuery
-  end
+  # # posts
+  #
+  # def find_post_by_id_query
+  #   PostType::FindByIdQuery
+  # end
+  #
+  # def save_post_command
+  #   PostType::SaveCommand
+  # end
+  #
+  # def destroy_post_command
+  #   PostType::DestroyCommand
+  # end
+  #
+  # # favorite pages
+  #
+  # def find_favorite_page_by_id_query
+  #   FavoritePageType::FindByIdQuery
+  # end
+  #
+  # def save_favorite_page_command
+  #   FavoritePageType::SaveCommand
+  # end
+  #
+  # def destroy_favorite_page_command
+  #   FavoritePageType::DestroyCommand
+  # end
+  #
+  # # search
+  #
+  # def search_query
+  #   SearchQuery
+  # end
+  #
+  # def timeline_query
+  #   TimelineQuery
+  # end
 
   #indices
 

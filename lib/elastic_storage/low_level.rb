@@ -4,11 +4,24 @@ module ElasticStorage
     module_function
 
     def put_to_index(type, id, document)
-      client.index index: index_name, type: type, id: id, body: document
+      client.index index: index_name, type: type, id: id, body: document, refresh: true
     end
 
     def delete_from_index(type, id)
-      client.delete index: index_name, type: type, id: id
+      client.delete index: index_name, type: type, id: id, refresh: true
+    end
+
+    def get(type, id, silent: false)
+      params = { index: index_name, type: type, id: id }
+      params.merge! ignore: [404] if silent
+      responce = client.get params
+      responce['_source']
+    rescue Elasticsearch::Transport::Transport::Errors::NotFound
+      raise NotFound
+    end
+
+    def search(query)
+
     end
 
     def client

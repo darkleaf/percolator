@@ -7,7 +7,7 @@ RSpec.describe 'favorite_pages', type: :request do
     let (:favorite_page) { create :favorite_page }
 
     it 'render with 200 status' do
-      get "/favorite_pages/#{favorite_page.id}"
+      get "/favorite_pages/#{favorite_page.to_param}"
       expect(response).to be_success
     end
   end
@@ -16,8 +16,8 @@ RSpec.describe 'favorite_pages', type: :request do
     let (:favorite_page) { create :favorite_page }
 
     it 'delete favorite_page' do
-      delete "/favorite_pages/#{favorite_page.id}"
-      expect(storage.find_favorite_page_by_id_query.call(favorite_page.id)).to be nil
+      delete "/favorite_pages/#{favorite_page.to_param}"
+      expect(FavoritePage).to_not be_exists(favorite_page)
     end
   end
 end
