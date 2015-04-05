@@ -1,12 +1,11 @@
 class SaveFavoritePageJob
   include SuckerPunch::Job
-  include ServiceLocator
 
   def perform(url)
     source = open(url, "User-Agent" => "Mozilla/5.0").read
-    attrs = DataExtractor.extract source, url
-
-    page = FavoritePage.new attrs
-    storage.save_favorite_page_command.call page
+    attrs = DataExtractor.call source, url
+    url_digest = UrlDigestGenerator.call url
+    page = FavoritePage.find_or_initialize_by url_digest: url_digest
+    page.update! attrs
   end
 end

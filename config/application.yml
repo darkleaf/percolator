@@ -1,13 +1,8 @@
 elasticsearch_url: http://localhost:9200
-storage: ElasticStorage
 password: password
 api_key: api_key
 google_analytics: UA-xxxxxx-x
 disqus_shortname: short-name
-
-test:
-  elasticsearch_url: http://localhost:9201
-  storage: MemoryStorage
 
 production:
   elasticsearch_url: <%= ENV['BONSAI_URL']%>

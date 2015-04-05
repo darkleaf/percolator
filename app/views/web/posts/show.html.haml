@@ -1,4 +1,4 @@
-- keywords @post.favorite_pages_query
+- keywords @post.relative_query_without_self
 
 .page-header
   %h1= title @post.title
@@ -8,9 +8,9 @@
     - if signed_in?
       %li= link_to 'edit', edit_post_path(@post)
       %li= link_to 'delete', post_path(@post), method: :delete, data: { confirm: "Are you sure?" }
-~ markdown @post.content
+!~ @post.content
 
 - @materials.each do |m|
-  = render "web/shared/search_result/#{m.type}", object: m
+  = render "web/shared/search_result/#{m.model_name.singular}", object: m
 
 = render 'web/shared/disqus'

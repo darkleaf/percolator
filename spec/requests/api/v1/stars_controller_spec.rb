@@ -4,7 +4,7 @@ RSpec.describe 'api v1 stars', type: :request do
   context 'create action' do
     let(:url) { generate :url }
     let(:html) { generate :page_html }
-    let(:id) { PageIdGenerator.generate_from_url url }
+    let(:url_digest) { UrlDigestGenerator.call url }
     let!(:stub) { stub_request(:get, url).to_return(body: html) }
     let(:params) { {star: { url: url }, api_key: Figaro.env.api_key} }
 
@@ -15,14 +15,12 @@ RSpec.describe 'api v1 stars', type: :request do
 
     it 'save favorite page' do
       post "/api/v1/stars/", params
-      page = storage.find_favorite_page_by_id_query.call(id)
-      expect(page).to be
+      page = FavoritePage.find_by! url_digest: url_digest
       expect(page.title).to be
       expect(page.description).to be
       expect(page.keywords).to be
       expect(page.content).to be
       expect(page.url).to be
-      expect(page.host).to be
     end
   end
 end

@@ -21,8 +21,9 @@ Dir[Rails.root.join("spec/support/**/*.rb")].each { |f| require f }
 
 WebMock.disable_net_connect!(allow_localhost: true, allow: 'codeclimate.com')
 
+ActiveRecord::Migration.maintain_test_schema!
+
 RSpec.configure do |config|
-  config.include ServiceLocator
   config.include FactoryGirl::Syntax::Methods
 
   # RSpec Rails can automatically mix in different behaviours to your tests
@@ -40,18 +41,32 @@ RSpec.configure do |config|
   # https://relishapp.com/rspec/rspec-rails/docs
   config.infer_spec_type_from_file_location!
 
+
+  config.around(:each) do |example|
+    DatabaseCleaner.cleaning do
+      example.run
+    end
+  end
+
+
   config.before :suite do
-    ElasticStorage.remove_indices_command.call
-    ElasticStorage.create_indices_command.call
-    ElasticStorage.put_mappings_command.call
+    DatabaseCleaner.strategy = :truncation
+    DatabaseCleaner.clean_with(:truncation)
+
+    ElasticStorage.remove_index
+    ElasticStorage.create_index
+    ElasticStorage.put_mappings
   end
 
   config.after :suite do
-    ElasticStorage.remove_indices_command.call
+    ElasticStorage.remove_index
   end
 
-  config.after :each do
-    storage.clear_command.call
+  config.around(:each) do |example|
+    DatabaseCleaner.cleaning do
+      example.run
+    end
+    ElasticStorage.clear
   end
 end
 

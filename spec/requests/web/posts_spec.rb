@@ -7,7 +7,7 @@ RSpec.describe 'posts', type: :request do
     let (:post_model) { create :post }
 
     it 'render with 200 status' do
-      get "/posts/#{post_model.id}"
+      get "/posts/#{post_model.to_param}"
       expect(response).to be_success
     end
   end
@@ -23,7 +23,7 @@ RSpec.describe 'posts', type: :request do
     let (:post_model) { create :post }
 
     it 'render with 200 status' do
-      get "/posts/#{post_model.id}/edit"
+      get "/posts/#{post_model.to_param}/edit"
       expect(response).to be_success
     end
   end
@@ -33,9 +33,7 @@ RSpec.describe 'posts', type: :request do
 
     it 'create post' do
       post "/posts/", post: post_attrs
-      posts = storage.search_query.call post_attrs[:title]
-      expect(posts.one?).to be true
-      expect(posts.first.title).to eq(post_attrs[:title])
+      expect(Post).to be_exists(title: post_attrs[:title])
     end
   end
 
@@ -44,9 +42,9 @@ RSpec.describe 'posts', type: :request do
     let (:post_attrs) { attributes_for :post }
 
     it 'update post' do
-      patch "/posts/#{post_model.id}", post: post_attrs
-      reloaded_post = storage.find_post_by_id_query.call post_model.id
-      expect(reloaded_post.attributes.slice(*post_attrs.keys)).to eq post_attrs
+      patch "/posts/#{post_model.to_param}", post: post_attrs
+      new_attrs = post_model.reload.attributes.symbolize_keys.slice(*post_attrs.keys)
+      expect(new_attrs).to eq post_attrs
     end
   end
 
@@ -54,8 +52,8 @@ RSpec.describe 'posts', type: :request do
     let (:post_model) { create :post }
 
     it 'delete post' do
-      delete "/posts/#{post_model.id}"
-      expect(storage.find_post_by_id_query.call(post_model.id)).to be nil
+      delete "/posts/#{post_model.to_param}"
+      expect(Post).to_not be_exists(post_model.id)
     end
   end
 end

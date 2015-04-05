@@ -1,61 +1,34 @@
 module ElasticStorage
-  extend self
+  NotFound = Class.new(StandardError)
 
-  class NotFound < StandardError; end
+  mattr_accessor(:low_level){ LowLevel }
 
-  # posts
+  module_function
 
-  def find_post_by_id_query
-    PostType::FindByIdQuery
+  class << self
+    delegate :put_mappings, :remove_index, :create_index, :clear, to: :low_level
   end
 
-  def save_post_command
-    PostType::SaveCommand
+  def put_to_index(model, refresh: false)
+    batch = Array.wrap(model).map do |m|
+      document = ModelToDocument.const_get(m.class.to_s, false).call m
+      { _type: m.model_name.singular, _id: m.id, data: document }
+    end
+
+    low_level.put batch, refresh: refresh
   end
 
-  def destroy_post_command
-    PostType::DestroyCommand
+  def delete_from_index(model, refresh: false)
+    batch = Array.wrap(model).map do |m|
+      { _type: m.model_name.singular, _id: m.id }
+    end
+
+    low_level.delete batch, refresh: refresh
   end
 
-  # favorite pages
-
-  def find_favorite_page_by_id_query
-    FavoritePageType::FindByIdQuery
-  end
-
-  def save_favorite_page_command
-    FavoritePageType::SaveCommand
-  end
-
-  def destroy_favorite_page_command
-    FavoritePageType::DestroyCommand
-  end
-
-  # search
-
-  def search_query
-    SearchQuery
-  end
-
-  def timeline_query
-    TimelineQuery
-  end
-
-  #indices
-
-  def clear_command
-    Service::ClearCommand
-  end
-
-  def create_indices_command
-    Service::CreateIndicesCommand
-  end
-
-  def remove_indices_command
-    Service::RemoveIndicesCommand
-  end
-
-  def put_mappings_command
-    Service::PutMappingsCommand
+  def get(type, raw_id)
+    id = raw_id.to_s.split('-').first
+    document = low_level.get(type, id)
+    "#{type}_view".camelcase.constantize.load(id, document)
   end
 end

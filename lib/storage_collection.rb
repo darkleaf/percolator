@@ -4,6 +4,7 @@ class StorageCollection
   attr_accessor :total_count, :limit_value, :offset_value
 
   delegate :each, to: :@search_results
+  delegate :ap, :ai, to: :@search_results # awesome_print
 
   def initialize(search_results, total_count = nil, limit_value = nil, offset_value = nil)
     @search_results = search_results
