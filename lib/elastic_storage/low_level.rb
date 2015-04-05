@@ -3,11 +3,11 @@ module ElasticStorage
     mattr_reader(:index_name){ [:documents, Rails.env].join('_') }
     module_function
 
-    def put_to_index(type, id, document)
+    def put(type, id, document)
       client.index index: index_name, type: type, id: id, body: document, refresh: true
     end
 
-    def delete_from_index(type, id)
+    def delete(type, id)
       client.delete index: index_name, type: type, id: id, refresh: true
     end
 
@@ -22,27 +22,30 @@ module ElasticStorage
 
     end
 
+    def create_indices_command
+      client.indices.create index: index_name, body: { settings: Settings.settings }
+    end
+
+    def put_mappings_command
+      Settings.mappings.each do |type, mapping|
+        client.indices.put_mapping index: index_name, type: type, body: { type => mapping }, ignore_conflicts: true
+      end
+    end
+
+    def remove_indices_command
+      client.indices.delete index: '_all'
+    end
+
+    def clear_command
+      client.delete_by_query index: index_name, body: { query: { match_all: {} } }
+    end
+
     def client
       Thread.current[:elastic_client] ||= Elasticsearch::Client.new url: Figaro.env.elasticsearch_url
     end
 
-    module FindByIdQuery
-      extend Client
-      extend self
-
-      def call(type, id, mapper, silent: false )
-        params = { index: 'documents', type: type, id: id }
-        params.merge! ignore: [404] if silent
-        response = client.get params
-        return unless response
-        mapper.call Hashie::Mash.new(response)
-      rescue Elasticsearch::Transport::Transport::Errors::NotFound
-        raise NotFound
-      end
-    end
-
     module SearchQuery
-      extend Client
+      # extend Client
       extend self
 
       # map = { type: ->(id, source){ Model.new } }
@@ -79,24 +82,6 @@ module ElasticStorage
         end
 
         StorageCollection.new models, response['hits']['total'], size, from
-      end
-    end
-
-    module SaveCommand
-      extend Client
-      extend self
-
-      def call(type, id, attributes)
-        client.index index: 'documents', type: type, id: id, body: attributes, refresh: true
-      end
-    end
-
-    module DestroyCommand
-      extend Client
-      extend self
-
-      def call(type, id)
-        client.delete index: 'documents', type: type, id: id, refresh: true
       end
     end
   end
