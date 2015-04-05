@@ -1,5 +1,20 @@
 module ElasticStorage
   module LowLevel
+    mattr_reader(:index_name){ [:documents, Rails.env].join('_') }
+    module_function
+
+    def put_to_index(type, id, document)
+      client.index index: index_name, type: type, id: id, body: document
+    end
+
+    def delete_from_index(type, id)
+      client.delete index: index_name, type: type, id: id
+    end
+
+    def client
+      Thread.current[:elastic_client] ||= Elasticsearch::Client.new url: Figaro.env.elasticsearch_url
+    end
+
     module FindByIdQuery
       extend Client
       extend self

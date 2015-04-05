@@ -31,5 +31,6 @@ module Percolator
     config.action_dispatch.rescue_responses.merge!(
       'ElasticStorage::NotFound'   => :not_found,
     )
+    config.active_record.raise_in_transactional_callbacks = true
   end
 end

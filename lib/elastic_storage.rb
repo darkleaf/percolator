@@ -1,7 +1,18 @@
 module ElasticStorage
-  extend self
+  NotFound = Class.new(StandardError)
 
-  class NotFound < StandardError; end
+  mattr_accessor(:low_level){ LowLevel }
+
+  module_function
+
+  def put_to_index(model)
+    document = ModelToDocument.const_get(model.class.to_s, false).call model
+    low_level.put_to_index model.model_name.singular, model.id, document
+  end
+
+  def delete_from_index(model)
+    low_level.delete_from_index model.model_name.singular, model.id
+  end
 
   # posts
 
