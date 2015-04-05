@@ -7,24 +7,23 @@ module ElasticStorage
 
   class << self
     delegate :put_mappings, :remove_index, :create_index, :clear, to: :low_level
-    delegate :need_index_refresh, :need_index_refresh=, to: :low_level
   end
 
-  def put_to_index(model)
+  def put_to_index(model, refresh: false)
     batch = Array.wrap(model).map do |m|
       document = ModelToDocument.const_get(m.class.to_s, false).call m
       { _type: m.model_name.singular, _id: m.id, data: document }
     end
 
-    low_level.put batch
+    low_level.put batch, refresh: refresh
   end
 
-  def delete_from_index(model)
+  def delete_from_index(model, refresh: false)
     batch = Array.wrap(model).map do |m|
       { _type: m.model_name.singular, _id: m.id }
     end
 
-    low_level.delete batch
+    low_level.delete batch, refresh: refresh
   end
 
   def get(type, raw_id)

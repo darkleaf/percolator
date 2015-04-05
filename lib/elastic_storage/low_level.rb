@@ -2,19 +2,18 @@ module ElasticStorage
   module LowLevel
 
     mattr_reader(:index_name){ [:documents, Rails.env].join('_') }
-    mattr_accessor(:need_index_refresh){ false }
     module_function
 
-    def put(batch)
-      bulk batch.map{ |b| { index: b } }
+    def put(batch, refresh: false)
+      bulk batch.map{ |b| { index: b } }, refresh: refresh
     end
 
-    def delete(batch)
-      bulk batch.map{ |b| { delete: b } }
+    def delete(batch, refresh: false)
+      bulk batch.map{ |b| { delete: b } }, refresh: refresh
     end
 
-    def bulk(body)
-      client.bulk index: index_name, body: body, refresh: need_index_refresh
+    def bulk(body, refresh: false)
+      client.bulk index: index_name, body: body, refresh: refresh
     end
 
     def get(type, id)

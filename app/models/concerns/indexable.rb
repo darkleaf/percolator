@@ -16,10 +16,10 @@ module Indexable
 
   private
   def put_to_index
-    PutToIndexJob.new.async.perform(self)
+    ElasticStorage.put_to_index self, refresh: true
   end
 
   def delete_from_index
-    DeleteFromIndexJob.new.async.perform(self)
+    ElasticStorage.delete_from_index self, refresh: true
   end
 end

@@ -12,15 +12,6 @@ RSpec.describe 'posts', type: :request do
     end
   end
 
-  context 'index page' do
-    let! (:post_model) { create :post }
-
-    it 'render with 200 status' do
-      get '/posts'
-      expect(response).to be_success
-    end
-  end
-
   context 'new page' do
     it 'render with 200 status' do
       get "/posts/new"
