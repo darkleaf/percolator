@@ -37,6 +37,7 @@ gem 'bootstrap-kaminari-views'
 
 gem 'ruby-readability'
 gem 'addressable', require: %w[addressable/uri]
+gem 'rest_client'
 
 gem 'rack-google-analytics'
 
