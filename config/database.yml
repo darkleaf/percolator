@@ -1,0 +1,13 @@
+setup: &setup
+  adapter: postgresql
+  encoding: unicode
+  pool: 5
+  username: postgres
+
+development:
+  <<: *setup
+  database: percolator_development
+
+test:
+  <<: *setup
+  database: percolator_test

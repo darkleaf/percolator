@@ -11,30 +11,27 @@ class Web::PostsController < Web::ApplicationController
   end
 
   def create
-    @post = Post.new post_params
-    storage.save_post_command.call @post
-    redirect_to post_path(@post)
+    @post = Post.create post_params
+    respond_with @post
   end
 
   def edit
-    @post = storage.find_post_by_id_query.call params[:id]
+    @post = Post.find params[:id]
   end
 
   def update
-    @post = storage.find_post_by_id_query.call params[:id]
-    @post.attributes = post_params
-    storage.save_post_command.call @post
-    redirect_to post_path(@post)
+    @post = Post.find params[:id]
+    @post.update post_params
+    respond_with @post
   end
 
   def destroy
-    @post = storage.find_post_by_id_query.call params[:id]
-    storage.destroy_post_command.call @post
-    redirect_to root_path
+    @post = Post.destroy params[:id]
+    respond_with @post
   end
 
 private
   def post_params
-    params.require(:post).permit(:title, :content, :favorite_pages_query)
+    params.require(:post).permit(:title, :content, :relative_query)
   end
 end

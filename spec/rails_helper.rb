@@ -40,7 +40,18 @@ RSpec.configure do |config|
   # https://relishapp.com/rspec/rspec-rails/docs
   config.infer_spec_type_from_file_location!
 
+
+  config.around(:each) do |example|
+    DatabaseCleaner.cleaning do
+      example.run
+    end
+  end
+
+
   config.before :suite do
+    DatabaseCleaner.strategy = :truncation
+    DatabaseCleaner.clean_with(:truncation)
+
     ElasticStorage.remove_indices_command.call
     ElasticStorage.create_indices_command.call
     ElasticStorage.put_mappings_command.call
@@ -50,7 +61,10 @@ RSpec.configure do |config|
     ElasticStorage.remove_indices_command.call
   end
 
-  config.after :each do
+  config.around(:each) do |example|
+    DatabaseCleaner.cleaning do
+      example.run
+    end
     storage.clear_command.call
   end
 end
