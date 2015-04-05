@@ -1,22 +1,25 @@
 namespace :elastic_storage do
-  desc "Create index"
-  task create_indices: :environment do
+  desc 'Create index'
+  task create_index: :environment do
     ElasticStorage.create_index
   end
 
-  desc "Put mappings"
+  desc 'Put mappings'
   task put_mappings: :environment do
     ElasticStorage.put_mappings
   end
 
-  desc "Remove index"
-  task remove_indices: :environment do
+  desc 'Remove index'
+  task remove_index: :environment do
     ElasticStorage.remove_index
   end
 
-  desc "Create index and put mappings"
-  task prepare: %i[create_indices put_mappings]
+  desc 'Index documents'
+  task index: :environment do
+    Post.index
+    FavoritePage.index
+  end
 
-  desc "Reset index and put mappings"
-  task reset: %i[remove_indices create_indices put_mappings]
+  desc 'Reindex'
+  task reindex: %i[remove_index create_index put_mappings index]
 end
