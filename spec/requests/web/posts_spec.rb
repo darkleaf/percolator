@@ -62,7 +62,7 @@ RSpec.describe 'posts', type: :request do
 
     it 'delete post' do
       delete "/posts/#{post_model.to_param}"
-      expect(Post).to_not be_exists(post_model)
+      expect(Post).to_not be_exists(post_model.id)
     end
   end
 end

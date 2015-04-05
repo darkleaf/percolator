@@ -17,7 +17,7 @@ RSpec.describe 'favorite_pages', type: :request do
 
     it 'delete favorite_page' do
       delete "/favorite_pages/#{favorite_page.to_param}"
-      expect(FavoritePage).to_not be_exists(favorite_page)
+      expect(FavoritePage).to_not be_exists(favorite_page.id)
     end
   end
 end
