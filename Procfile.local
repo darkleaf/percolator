@@ -1,5 +1,4 @@
 postgresql: postgres -D /usr/local/var/postgres
-elasticsearch_development: elasticsearch/bin/elasticsearch
-elasticsearch_test: elasticsearch/bin/elasticsearch -Des.config=elasticsearch/config/elasticsearch-test.yml
+elasticsearch: elasticsearch/bin/elasticsearch
 
 web: rails s
