@@ -10,4 +10,4 @@ before_install:
   - sudo /usr/share/elasticsearch/bin/plugin -install elasticsearch/elasticsearch-analysis-icu/2.3.0
   - sudo service elasticsearch start
 before_script:
-  - bundle exec rake db:schema:load
+  - bundle exec rake db:create db:schema:load
