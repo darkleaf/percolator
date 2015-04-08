@@ -7,7 +7,6 @@ gem 'pg'
 gem 'elasticsearch'
 
 gem 'uglifier', '>= 1.3.0'
-gem 'therubyracer',  platforms: :ruby
 
 gem 'sass-rails', '~> 4.0.3'
 gem 'jquery-rails'
