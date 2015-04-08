@@ -6,7 +6,7 @@ module ElasticStorage
   module_function
 
   class << self
-    delegate :put_mappings, :remove_index, :create_index, :clear, to: :low_level
+    delegate :put_mappings, :remove_index, :create_index, :clear, :refresh_index, to: :low_level
   end
 
   def put_to_index(model, refresh: false)

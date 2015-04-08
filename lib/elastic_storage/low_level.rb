@@ -28,6 +28,10 @@ module ElasticStorage
       responce['hits']
     end
 
+    def refresh_index
+      client.indices.refresh index: index_name
+    end
+
     def create_index
       client.indices.create index: index_name, body: { settings: Settings.settings }
     end
