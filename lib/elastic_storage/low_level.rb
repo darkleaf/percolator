@@ -33,13 +33,7 @@ module ElasticStorage
     end
 
     def create_index
-      client.indices.create index: index_name, body: { settings: Settings.settings }
-    end
-
-    def put_mappings
-      Settings.mappings.each do |type, mapping|
-        client.indices.put_mapping index: index_name, type: type, body: { type => mapping }, ignore_conflicts: true
-      end
+      client.indices.create index: index_name, body: index_config
     end
 
     def remove_index
@@ -48,6 +42,10 @@ module ElasticStorage
 
     def clear
       client.delete_by_query index: index_name, body: { query: { match_all: {} } }
+    end
+
+    def index_config
+      YAML.load_file Rails.root.join 'config', 'elastic_index.yml'
     end
 
     def client

@@ -55,7 +55,6 @@ RSpec.configure do |config|
 
     ElasticStorage.remove_index
     ElasticStorage.create_index
-    ElasticStorage.put_mappings
   end
 
   config.after :suite do
