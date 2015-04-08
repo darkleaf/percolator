@@ -48,7 +48,7 @@ gem 'newrelic_rpm'
 gem 'rollbar'
 
 group :development, :test do
-  gem 'rspec-rails', '~> 3.0.0'
+  gem 'rspec-rails'
   gem 'awesome_print'
 end
 
